@@ -1,8 +1,11 @@
 package com.example.madcamp_week01
 
+import android.app.Dialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -25,9 +28,30 @@ class GalleryAdapter(private val imageList: List<Int>) :
         Glide.with(holder.itemView.context)
             .load(imageUrl)
             .into(holder.imageView)
+
+        holder.itemView.setOnClickListener{
+            showImagePopup(holder.itemView.context, imageUrl)
+        }
     }
 
     override fun getItemCount(): Int {
         return imageList.size
+    }
+
+    private fun showImagePopup(context: Context, imageUrl: Int) {
+        val dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.popup_image)
+
+        val popupImageView: ImageView = dialog.findViewById(R.id.popupImageView)
+        Glide.with(context)
+            .load(imageUrl)
+            .into(popupImageView)
+
+        popupImageView.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }
