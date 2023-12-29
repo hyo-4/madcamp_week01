@@ -3,6 +3,9 @@
     <string name="address">My Address</string>
     <string name="gallery">Gallery</string>
     <string name="free">Free Tab</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="addressName">Name</string>
+    <string name="newcontact">New Address</string>
+    <string name="addphoto">Add Photo</string>
+    <string name="complete">Complete</string>
 </resources>
