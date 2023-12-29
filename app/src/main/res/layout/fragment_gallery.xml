@@ -1,37 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF"
     tools:context=".Gallery">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#A3EBFD"
-        android:text="Gallery" />
+        <!-- TODO: Update blank fragment layout -->
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:fontFamily="sans-serif-medium"
+            android:text="Gallery"
+            android:textAlignment="center"
+            android:textColor="#673AB7"
+            android:layout_marginTop="10dp"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_marginTop="70dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="70dp" />
 
         <TextView
             android:id="@+id/imageCountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
             android:padding="8dp"
-            android:textColor="#ffffff"
-            tools:ignore="MissingConstraints" />
+            android:text="이미지 개수"
+            android:textColor="#392467"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="327dp"
+            tools:layout_editor_absoluteY="33dp" />
 
         <Button
             android:id="@+id/pickImageButton"
