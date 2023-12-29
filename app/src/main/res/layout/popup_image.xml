@@ -10,4 +10,13 @@
         android:adjustViewBounds="true"
         android:scaleType="fitCenter" />
 
+    <TextView
+        android:id="@+id/popupTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Popup Text"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
 </RelativeLayout>
