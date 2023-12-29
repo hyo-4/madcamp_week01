@@ -1,19 +1,27 @@
 package com.example.madcamp_week01
 
+import android.app.AlertDialog
 import android.app.Dialog
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.fragment.app.FragmentActivity
 import android.view.Window
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class GalleryAdapter(private val dataItems: List<DataItem>) :
+class GalleryAdapter(private val dataItems: MutableList<DataItem>) :
     RecyclerView.Adapter<GalleryAdapter.ImageViewHolder>() {
 
     inner class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -66,4 +74,35 @@ class GalleryAdapter(private val dataItems: List<DataItem>) :
 
         dialog.show()
     }
+
+    fun addDataItem(context: Context) {
+        val inflater = LayoutInflater.from(context)
+        val dialogView = inflater.inflate(R.layout.add_item, null)
+
+        val imageEditText: EditText = dialogView.findViewById(R.id.dialogImageEditText)
+        val textEditText: EditText = dialogView.findViewById(R.id.dialogTextEditText)
+
+        AlertDialog.Builder(context)
+            .setTitle("Add New Item")
+            .setView(dialogView)
+            .setPositiveButton("Add") { _, _ ->
+                val imageResId = imageEditText.text.toString().toIntOrNull()
+                val text = textEditText.text.toString()
+
+                if (imageResId != null && text.isNotEmpty()) {
+                    val newDataItem = DataItem(imageResId, text)
+                    dataItems.add(newDataItem)
+                    notifyDataSetChanged()
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Invalid input. Please enter both image ID and text.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
 }
