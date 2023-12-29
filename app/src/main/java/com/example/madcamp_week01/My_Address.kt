@@ -6,19 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week01.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class My_Address : Fragment() {
+class MyAddress : Fragment() {
     lateinit var recyclerV: RecyclerView
     lateinit var noAddressDataTextView: TextView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    val TAG = "ListActivity"
+    var db: AppDatabase? = null
+    var contactsList = mutableListOf<Contacts>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,18 +31,32 @@ class My_Address : Fragment() {
         recyclerV = view.findViewById(R.id.recyclerV)
         noAddressDataTextView = view.findViewById(R.id.noAddressData)
 
-        val addressList = loadData()
+        // Initialize the Room database
+        db = AppDatabase.getDatabase(requireContext())
 
-        if (addressList.isEmpty()) {
-            noAddressDataTextView.visibility = View.VISIBLE
-            recyclerV.visibility = View.GONE
-        }
-        else {
-            noAddressDataTextView.visibility = View.GONE
-            recyclerV.visibility = View.VISIBLE
-            val adapter = AddressAdapter(loadData())
-            recyclerV.adapter = adapter
-            recyclerV.layoutManager = LinearLayoutManager(context)
+        // Use lifecycleScope.launch to perform database operations in a coroutine
+        viewLifecycleOwner.lifecycleScope.launch {
+            // Use withContext to switch to the IO dispatcher for database operations
+            try {
+                contactsList.addAll(withContext(Dispatchers.IO) {
+                    db?.contactsDao()?.getAll() ?: emptyList()
+                })
+
+                if (contactsList.isEmpty()) {
+                    noAddressDataTextView.visibility = View.VISIBLE
+                    recyclerV.visibility = View.GONE
+                } else {
+                    noAddressDataTextView.visibility = View.GONE
+                    recyclerV.visibility = View.VISIBLE
+
+                    val adapter = AddressAdapter(contactsList)
+                    recyclerV.adapter = adapter
+                    recyclerV.layoutManager = LinearLayoutManager(context)
+                }
+            } catch (e: Exception) {
+                // Handle exceptions (e.g., display an error message)
+                e.printStackTrace()
+            }
         }
 
         val plusButton: ImageButton = view.findViewById(R.id.plusbutton)
@@ -50,18 +66,10 @@ class My_Address : Fragment() {
 
         return view
     }
-    fun loadData() : List<Memo> {
-        val list = mutableListOf<Memo>()
-        for(i in 0..30){
-            val memo = Memo(R.drawable.contact, "${i}번째 이름", "000-0000-0000")
-            list.add(memo)
-        }
-        return list
-    }
 
     private fun navigateToAddContactFragment() {
         // Create an instance of the AddContact fragment
-        val addContactFragment = addcontactfragment()
+        val addContactFragment = AddContactFragment()
 
         // Replace the current fragment with the AddContact fragment
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -69,7 +77,4 @@ class My_Address : Fragment() {
         fragmentTransaction.addToBackStack(null) // Optional: Adds the transaction to the back stack
         fragmentTransaction.commit()
     }
-
-
-
 }

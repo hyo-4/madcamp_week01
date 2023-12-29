@@ -49,12 +49,19 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
-    implementation("androidx.room:room-runtime:2.2.5")
-    kapt("androidx.room:room-compiler:2.2.5")
-    implementation("androidx.room:room-ktx:2.2.5")
-    implementation("androidx.room:room-rxjava2:2.2.5")
-    implementation("androidx.room:room-guava:2.2.5")
-    testImplementation("androidx.room:room-testing:2.2.5")
+    implementation("androidx.room:room-runtime:2.2.6")
+    kapt("androidx.room:room-compiler:2.2.6")
+    implementation("androidx.room:room-ktx:2.2.6")
+    implementation("androidx.room:room-rxjava2:2.2.6")
+    implementation("androidx.room:room-guava:2.2.6")
+    androidTestImplementation("androidx.room:room-testing:2.2.6")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+    kapt ("androidx.lifecycle:lifecycle-compiler:2.2.0")
+    // UI
+    implementation ("com.google.android.material:material:1.1.0")
+    // Testng
+    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

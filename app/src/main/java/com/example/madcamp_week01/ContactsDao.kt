@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
+@Dao
 interface ContactsDao {
     @Query("SELECT * FROM tb_contacts")
     fun getAll(): List<Contacts>
