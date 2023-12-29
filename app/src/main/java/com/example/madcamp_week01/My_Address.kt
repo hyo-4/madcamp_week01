@@ -5,13 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week01.databinding.ActivityMainBinding
 
 class My_Address : Fragment() {
     lateinit var recyclerV: RecyclerView
     lateinit var noAddressDataTextView: TextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +42,12 @@ class My_Address : Fragment() {
             recyclerV.adapter = adapter
             recyclerV.layoutManager = LinearLayoutManager(context)
         }
+
+        val plusButton: ImageButton = view.findViewById(R.id.plusbutton)
+        plusButton.setOnClickListener {
+            navigateToAddContactFragment()
+        }
+
         return view
     }
     fun loadData() : List<Memo> {
@@ -45,6 +58,18 @@ class My_Address : Fragment() {
         }
         return list
     }
+
+    private fun navigateToAddContactFragment() {
+        // Create an instance of the AddContact fragment
+        val addContactFragment = addcontactfragment()
+
+        // Replace the current fragment with the AddContact fragment
+        val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, addContactFragment)
+        fragmentTransaction.addToBackStack(null) // Optional: Adds the transaction to the back stack
+        fragmentTransaction.commit()
+    }
+
 
 
 }
