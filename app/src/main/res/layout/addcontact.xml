@@ -5,7 +5,7 @@
     android:id="@+id/addcontactpage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFCEE">
+    android:background="#FFFFFF">
 
     <TextView
         android:id="@+id/newcontact"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="@string/newcontact"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:id="@+id/addimagebutton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/blankcontact"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -67,14 +67,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editname" />
 
-    <Button
+    <ImageButton
         android:id="@+id/completebutton"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/buttonshape"
-        android:minHeight="0dp"
-        android:text="@string/complete"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="95dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/complete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

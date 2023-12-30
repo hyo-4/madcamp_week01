@@ -11,7 +11,7 @@ interface ContactsDao {
     @Query("SELECT * FROM tb_contacts")
     fun contactLiveSelect() : LiveData<MutableList<Contacts>>
 
-    @Query("SELECT * FROM tb_contacts")
+    @Query("SELECT * FROM tb_contacts ORDER BY name ASC")
     fun getAll(): List<Contacts>
 
     @Insert
