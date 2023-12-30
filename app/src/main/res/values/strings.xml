@@ -10,4 +10,8 @@
     <string name="complete">Complete</string>
     <string name="schedule">Calendar</string>
     <string name="select_option">Select an Option</string>
+    <string name="todayDiet"><b>오늘의 식단</b></string>
+    <string name="todayWorkout"><b>오늘의 운동</b></string>
+    <string name="exerciseType"><b>운동 종류</b></string>
+    <string name="exerciseTime"><b>운동 시간</b></string>
 </resources>
