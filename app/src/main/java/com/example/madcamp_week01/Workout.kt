@@ -14,5 +14,4 @@ data class Workout(
     var dinnerImg: Uri?,
     var workoutType: String?,
     var workoutTime: String?,
-    var memo: String?
 )
