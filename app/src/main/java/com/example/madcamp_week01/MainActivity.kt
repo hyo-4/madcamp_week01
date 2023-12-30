@@ -6,7 +6,7 @@ import com.google.android.material.tabs.TabLayout
 import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() {
-    lateinit var tab1:My_Address
+    lateinit var tab1:MyAddress
     lateinit var tab2:Gallery
     lateinit var tab3:Free
 
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val tabLayout: TabLayout = findViewById(R.id.tab_layout)
-        tab1 = My_Address()
+        tab1 = MyAddress()
         tab2 = Gallery()
         tab3 = Free()
 

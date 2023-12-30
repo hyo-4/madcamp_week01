@@ -1,67 +1,74 @@
 package com.example.madcamp_week01
 
+import android.database.Cursor
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.madcamp_week01.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class My_Address : Fragment() {
+class MyAddress : Fragment() {
+    private var adapter: AddressAdapter? = null
     lateinit var recyclerV: RecyclerView
     lateinit var noAddressDataTextView: TextView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    var db: AppDatabase? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_my__address, container, false)
+        return inflater.inflate(R.layout.fragment_my__address, container, false)
+    }
+
+    override fun onViewCreated(view:View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         recyclerV = view.findViewById(R.id.recyclerV)
         noAddressDataTextView = view.findViewById(R.id.noAddressData)
+        db = AppDatabase.getInstance(requireContext())
+        CoroutineScope(Dispatchers.IO).launch{
+            val savedContacts = db?.contactsDao()?.getAll() ?: emptyList()
+            Log.d("savedContacts", "contacts: $savedContacts")
+            var contactsList = mutableListOf<Contacts>()
+            contactsList.addAll(savedContacts)
 
-        val addressList = loadData()
+            if (contactsList.isEmpty()) {
+                noAddressDataTextView.visibility = View.VISIBLE
+                recyclerV.visibility = View.GONE
+            } else {
 
-        if (addressList.isEmpty()) {
-            noAddressDataTextView.visibility = View.VISIBLE
-            recyclerV.visibility = View.GONE
+                    noAddressDataTextView.visibility = View.GONE
+                    recyclerV.visibility = View.VISIBLE
+
+                    adapter = AddressAdapter(contactsList)
+                    recyclerV.adapter = adapter
+                    recyclerV.layoutManager = LinearLayoutManager(context)
+            }
         }
-        else {
-            noAddressDataTextView.visibility = View.GONE
-            recyclerV.visibility = View.VISIBLE
-            val adapter = AddressAdapter(loadData())
-            recyclerV.adapter = adapter
-            recyclerV.layoutManager = LinearLayoutManager(context)
-        }
+
 
         val plusButton: ImageButton = view.findViewById(R.id.plusbutton)
         plusButton.setOnClickListener {
             navigateToAddContactFragment()
         }
-
-        return view
-    }
-    fun loadData() : List<Memo> {
-        val list = mutableListOf<Memo>()
-        for(i in 0..30){
-            val memo = Memo(R.drawable.contact, "${i}번째 이름", "000-0000-0000")
-            list.add(memo)
-        }
-        return list
     }
 
     private fun navigateToAddContactFragment() {
         // Create an instance of the AddContact fragment
-        val addContactFragment = addcontactfragment()
+        val addContactFragment = AddContactFragment()
 
         // Replace the current fragment with the AddContact fragment
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -69,7 +76,4 @@ class My_Address : Fragment() {
         fragmentTransaction.addToBackStack(null) // Optional: Adds the transaction to the back stack
         fragmentTransaction.commit()
     }
-
-
-
 }
