@@ -74,4 +74,3 @@ class GalleryAdapter(private val dataItems: MutableList<DataItem>) :
 //    }
 
 }
-

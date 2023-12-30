@@ -30,6 +30,7 @@ class Gallery : Fragment() {
     private lateinit var galleryAdapter: GalleryAdapter
     val dataList = mutableListOf(DataItem(R.drawable.img1,"new image1"),DataItem(R.drawable.img2,"new image2"),DataItem(R.drawable.img3,"new image3"),DataItem(R.drawable.img4,"new image"),DataItem(R.drawable.img5,"new image"),DataItem(R.drawable.img6,"new image"),DataItem(R.drawable.img7,"new image"),DataItem(R.drawable.img8,"new image"),DataItem(R.drawable.img9,"new image"),DataItem(R.drawable.img10,"new image"))
     val newDataList = mutableListOf<NewDataItem>()
+    private val AllofList = mutableListOf<Any>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,7 +52,12 @@ class Gallery : Fragment() {
         getResult =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
                 uri?.let {
+                    requireActivity().contentResolver.takePersistableUriPermission(
+                        it,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
                     newDataList.add(NewDataItem(it, "New Image"))
+                    AllofList.add(newDataList.last())
                     Log.d("new", newDataList.toString())
                 }
             }
@@ -59,17 +65,31 @@ class Gallery : Fragment() {
 
         addButton.setOnClickListener{
             //adapter.addDataItem(requireContext())
-            openGallery()
+            navigateToInputDataFragment()
         }
 
         return view
     }
 
+    private fun navigateToInputDataFragment() {
+        val inputDataFragment = InputDataFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentGallery, inputDataFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
 
     private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        intent.type = "image/*"
+//        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//        intent.type = "image/*"
         getResult.launch("image/*")
+    }
+
+    fun addNewData(newDataItem: NewDataItem) {
+        AllofList.add(newDataItem)
+        Log.d("gallery 저장 ", AllofList.toString())
+        galleryAdapter.notifyDataSetChanged()
     }
 
 }
