@@ -16,11 +16,19 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.madcamp_week01.databinding.AddcontactBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class InputDataFragment : Fragment() {
 
     lateinit var getResult: ActivityResultLauncher<String>
-    val newData = mutableListOf<NewDataItem>()
+    private lateinit var binding: AddcontactBinding
+    var db : AppDatabase? = null
+    var contactsList = mutableListOf<Contacts>()
+    var inputimage : Uri? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +43,9 @@ class InputDataFragment : Fragment() {
         val InputText = editText.text.toString()
         var InputImage : Uri
 
+        binding = AddcontactBinding.inflate(inflater, container, false)
+        db = AppDatabase.getInstance(requireContext())
+
         getResult =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
                 uri?.let {
@@ -44,8 +55,7 @@ class InputDataFragment : Fragment() {
                     )
                     imageView.setImageURI(uri)
                     InputImage = uri
-                    newData.add(NewDataItem(it, InputText))
-                    Log.d("new", newData.toString())
+
                 }
             }
 
@@ -54,7 +64,10 @@ class InputDataFragment : Fragment() {
         }
 
         saveButton.setOnClickListener {
-            navigateToGallery()
+            CoroutineScope(Dispatchers.IO).launch{
+            navigateToGallery()}
+
+
         }
 
         return view
@@ -67,15 +80,10 @@ class InputDataFragment : Fragment() {
     }
 
     private fun navigateToGallery() {
-//        val galleryNav = Gallery()
-//        requireActivity().supportFragmentManager.beginTransaction()
-//            .replace(R.id.inputContainer, galleryNav)
-//            .addToBackStack(null)
-//            .commit()
 
-        val galleryNav = Gallery()
+        val galleryNav = NewGallery()
         val fragmentTransaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.inputContainer, galleryNav)
+        fragmentTransaction.replace(R.id.newImageView, galleryNav)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
