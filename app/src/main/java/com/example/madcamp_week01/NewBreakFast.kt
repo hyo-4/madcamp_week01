@@ -25,6 +25,8 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
     var db: AppDatabase? = null
     var FoodData = mutableListOf<Workout>()
     var inputimage: Uri? = null
+    val selectedDate = "$year-$month-$Day"
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +35,7 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentFoodAddBinding.inflate(inflater, container, false)
         db = AppDatabase.getInstance(requireContext())
+        Log.d("date", "$selectedDate")
 
         getBreakFast =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
