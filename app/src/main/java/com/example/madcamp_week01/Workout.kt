@@ -13,6 +13,6 @@ data class Workout(
     var lunchImg: Uri?,
     var dinnerImg: Uri?,
     var workoutType: String?,
-    var time: String?,
+    var workoutTime: String?,
     var memo: String?
 )
