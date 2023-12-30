@@ -51,8 +51,8 @@ class Free : Fragment() {
 
 
         calendarV.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val selectedDate = "$year-$month-$dayOfMonth"
-            Log.d("date", "$selectedDate")
+//            val selectedDate = "$year-$month-$dayOfMonth"
+//            Log.d("date", "$selectedDate")
 //            CoroutineScope(Dispatchers.IO).launch{
 //                val dateWorkout = db?.workoutDao()?.getWorkoutByDate(year, month, dayOfMonth)
 //                if (dateWorkout != null) {
