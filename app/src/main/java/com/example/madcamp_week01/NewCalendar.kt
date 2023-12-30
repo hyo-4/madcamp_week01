@@ -29,9 +29,8 @@ import kotlinx.coroutines.launch
 
 class NewCalendar : Fragment() {
 
-
-
     private lateinit var selectImageButton: Button
+    private lateinit var calendarImageView : ImageView
     private lateinit var memoText: EditText
     private lateinit var calendarOptionSpinner: Spinner
     private lateinit var calendarSaveButton: Button

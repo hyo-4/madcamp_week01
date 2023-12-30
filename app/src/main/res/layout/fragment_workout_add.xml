@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:id="@+id/addCalendarPage"
+    android:id="@+id/addWorkoutPage"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,12 +12,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🗓캘린더에 등록하기🗓"
+            android:text="🗓운동 등록하기🗓"
             android:layout_marginLeft="16dp"
             android:textSize="20sp" />
 
+
         <ImageView
-            android:id="@+id/calendarImage"
+            android:id="@+id/workoutImage"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center"
@@ -27,7 +28,7 @@
             android:src="@drawable/blankimg" />
 
         <Button
-            android:id="@+id/selectImageButton"
+            android:id="@+id/selectworkout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -35,30 +36,29 @@
             android:layout_marginRight="40dp"
             android:text="Select Image" />
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" 내용을 입력하세요 "
-            />
-
-        <Spinner
-            android:id="@+id/CalendarOption"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:entries="@array/options_array"
-            android:prompt="@string/select_option"
+            android:text="운동하셨나요? 👟"
             />
 
         <EditText
-            android:id="@+id/memoText"
+            android:id="@+id/workTypeText"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:hint="Enter Memo"
+            android:hint="운동 종류를 입력하세요"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/WorkTimeText"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="운동 시간을 입력하세요"
             android:inputType="text"/>
 
         <Button
-            android:id="@+id/calendarSave"
+            android:id="@+id/workoutSave"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
