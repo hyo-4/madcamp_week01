@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 
-class AddressAdapter(val db: AppDatabase, var contactsList: List<Contacts>?) : RecyclerView.Adapter<AddressAdapter.Holder>() {
+class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<AddressAdapter.Holder>() {
 
     lateinit var mContext: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -29,15 +29,15 @@ class AddressAdapter(val db: AppDatabase, var contactsList: List<Contacts>?) : R
     }
     inner class Holder(itemView:View) : RecyclerView.ViewHolder(itemView) {
         var index:Int? = null
-//        private val imageView: ImageView = itemView.findViewById(R.id.imageView)
-//        private val nameTextView: TextView = itemView.findViewById(R.id.nameItem)
-//        private val numTextView: TextView = itemView.findViewById(R.id.numItem)
+        private val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        private val nameTextView: TextView = itemView.findViewById(R.id.nameItem)
+        private val numTextView: TextView = itemView.findViewById(R.id.numItem)
         fun setItem(contact:Contacts, position: Int){
             index = position
-//            val sampleImage = AppCompatResources.getDrawable(itemView.context, R.drawable.contact)
-//            imageView.setImageDrawable(sampleImage)
-//            nameTextView.text = contact.name
-//            numTextView.text = contact.tel
+            val sampleImage = AppCompatResources.getDrawable(itemView.context, R.drawable.contact)
+            imageView.setImageDrawable(sampleImage)
+            nameTextView.text = contact.name
+            numTextView.text = contact.tel
         }
     }
 }

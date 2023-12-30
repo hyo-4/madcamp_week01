@@ -55,6 +55,7 @@ dependencies {
     implementation("androidx.room:room-rxjava2:2.2.6")
     implementation("androidx.room:room-guava:2.2.6")
     androidTestImplementation("androidx.room:room-testing:2.2.6")
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.4.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     kapt ("androidx.lifecycle:lifecycle-compiler:2.2.0")
     // UI

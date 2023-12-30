@@ -1,6 +1,8 @@
 package com.example.madcamp_week01
 
+import android.database.Cursor
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,61 +12,58 @@ import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.madcamp_week01.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MyAddress : Fragment() {
+    private var adapter: AddressAdapter? = null
     lateinit var recyclerV: RecyclerView
     lateinit var noAddressDataTextView: TextView
-    val TAG = "ListActivity"
     var db: AppDatabase? = null
-    var contactsList = mutableListOf<Contacts>()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_my__address, container, false)
+        return inflater.inflate(R.layout.fragment_my__address, container, false)
+    }
+
+    override fun onViewCreated(view:View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         recyclerV = view.findViewById(R.id.recyclerV)
         noAddressDataTextView = view.findViewById(R.id.noAddressData)
+        db = AppDatabase.getInstance(requireContext())
+        CoroutineScope(Dispatchers.IO).launch{
+            val savedContacts = db?.contactsDao()?.getAll() ?: emptyList()
+            Log.d("savedContacts", "contacts: $savedContacts")
+            var contactsList = mutableListOf<Contacts>()
+            contactsList.addAll(savedContacts)
 
-        // Initialize the Room database
-        db = AppDatabase.getDatabase(requireContext())
+            if (contactsList.isEmpty()) {
+                noAddressDataTextView.visibility = View.VISIBLE
+                recyclerV.visibility = View.GONE
+            } else {
 
-        // Use lifecycleScope.launch to perform database operations in a coroutine
-        viewLifecycleOwner.lifecycleScope.launch {
-            // Use withContext to switch to the IO dispatcher for database operations
-            try {
-                contactsList.addAll(withContext(Dispatchers.IO) {
-                    db?.contactsDao()?.getAll() ?: emptyList()
-                })
-
-                if (contactsList.isEmpty()) {
-                    noAddressDataTextView.visibility = View.VISIBLE
-                    recyclerV.visibility = View.GONE
-                } else {
                     noAddressDataTextView.visibility = View.GONE
                     recyclerV.visibility = View.VISIBLE
 
-                    val adapter = AddressAdapter(contactsList)
+                    adapter = AddressAdapter(contactsList)
                     recyclerV.adapter = adapter
                     recyclerV.layoutManager = LinearLayoutManager(context)
-                }
-            } catch (e: Exception) {
-                // Handle exceptions (e.g., display an error message)
-                e.printStackTrace()
             }
         }
+
 
         val plusButton: ImageButton = view.findViewById(R.id.plusbutton)
         plusButton.setOnClickListener {
             navigateToAddContactFragment()
         }
-
-        return view
     }
 
     private fun navigateToAddContactFragment() {
