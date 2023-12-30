@@ -11,6 +11,14 @@
         android:padding="16dp"
         tools:ignore="MissingConstraints">
 
+        <ImageView
+            android:id="@+id/dialogImageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Selected Image"/>
+
         <EditText
             android:id="@+id/dialogImageEditText"
             android:layout_width="match_parent"
