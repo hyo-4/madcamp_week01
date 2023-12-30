@@ -32,10 +32,30 @@
         android:textSize="18sp"
         android:text="오늘 하루의 식단" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/breakfast"
         android:layout_width="100sp"
         android:layout_height="100sp"
+        android:layout_marginStart="31sp"
+        android:layout_marginTop="450sp"
         android:src="@drawable/diet1" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/lunch"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="450sp"
+        android:src="@drawable/diet2" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/dinner"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_gravity="right"
+        android:layout_marginTop="450sp"
+        android:layout_marginEnd="31sp"
+        android:src="@drawable/diet3" />
 
 </FrameLayout>
