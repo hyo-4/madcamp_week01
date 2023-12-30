@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [Contacts::class], version = 5, exportSchema = false)
+@Database(entities = [Contacts::class, Workout::class], version = 6, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun contactsDao(): ContactsDao
+    abstract fun workoutDao(): WorkoutDao
     //미리 만들어 놓은 ContactsDao를 접근할 수 있도록 abstract fun을 이용해서 contactsDao()를 만들어 준다
     companion object {
         //@Volatile
@@ -19,7 +20,8 @@ abstract class AppDatabase : RoomDatabase() {
                 INSTANCE = Room.databaseBuilder(
                     context,
                     AppDatabase::class.java,
-                    "memo_database")
+                    "memo_database"
+                )
                     .fallbackToDestructiveMigration()
                     .build()
             }
