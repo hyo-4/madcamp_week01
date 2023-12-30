@@ -30,7 +30,7 @@ class Gallery : Fragment() {
     private lateinit var galleryAdapter: GalleryAdapter
     val dataList = mutableListOf(DataItem(R.drawable.img1,"new image1"),DataItem(R.drawable.img2,"new image2"),DataItem(R.drawable.img3,"new image3"),DataItem(R.drawable.img4,"new image"),DataItem(R.drawable.img5,"new image"),DataItem(R.drawable.img6,"new image"),DataItem(R.drawable.img7,"new image"),DataItem(R.drawable.img8,"new image"),DataItem(R.drawable.img9,"new image"),DataItem(R.drawable.img10,"new image"))
     val newDataList = mutableListOf<NewDataItem>()
-    private val AllofList = mutableListOf<Any>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,8 +38,8 @@ class Gallery : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_gallery, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        val bundle = arguments
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-
 
         val adapter = GalleryAdapter(dataList)
         recyclerView.adapter = adapter
@@ -57,7 +57,6 @@ class Gallery : Fragment() {
                         Intent.FLAG_GRANT_READ_URI_PERMISSION
                     )
                     newDataList.add(NewDataItem(it, "New Image"))
-                    AllofList.add(newDataList.last())
                     Log.d("new", newDataList.toString())
                 }
             }
@@ -86,10 +85,5 @@ class Gallery : Fragment() {
         getResult.launch("image/*")
     }
 
-    fun addNewData(newDataItem: NewDataItem) {
-        AllofList.add(newDataItem)
-        Log.d("gallery 저장 ", AllofList.toString())
-        galleryAdapter.notifyDataSetChanged()
-    }
 
 }

@@ -68,9 +68,5 @@ class GalleryAdapter(private val dataItems: MutableList<DataItem>) :
         dialog.show()
     }
 
-//    fun updateData(newData: List<Any>) {
-//        var dataList = newData
-//        notifyDataSetChanged()
-//    }
 
 }
