@@ -38,4 +38,15 @@
         android:layout_height="100sp"
         android:src="@drawable/diet1" />
 
+    <ImageButton
+        android:id="@+id/plusbutton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:layout_gravity="bottom|end"
+        android:background="@android:color/transparent"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/plusbutton" />
+
 </FrameLayout>
