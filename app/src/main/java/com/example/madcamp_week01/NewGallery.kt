@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
+import android.os.Binder
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -66,7 +67,7 @@ class NewGallery : Fragment() {
         }
 
 
-        val plusButton: ImageButton = view.findViewById(R.id.newGalleryImageButton)
+        val plusButton: Button = view.findViewById(R.id.newGalleryImageButton)
         plusButton.setOnClickListener {
             navigateToAddContactFragment()
         }
@@ -76,7 +77,7 @@ class NewGallery : Fragment() {
         // Create an instance of the AddContact fragment
         val inputDataFragment = InputDataFragment()
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentGallery, inputDataFragment)
+            .replace(R.id.fragmentNewGallery, inputDataFragment)
             .addToBackStack(null)
             .commit()
     }
