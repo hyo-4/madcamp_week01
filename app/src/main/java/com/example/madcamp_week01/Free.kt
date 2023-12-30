@@ -5,29 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CalendarView
+import android.widget.ImageButton
+import android.widget.TextView
+import android.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Free.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Free : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var calendarV : CalendarView
+    lateinit var todayDiet : TextView
+    lateinit var todayWorkout : TextView
+    lateinit var bfImg : ImageButton
+    lateinit var lunchImg : ImageButton
+    lateinit var dinnerImg : ImageButton
+    lateinit var wImg : ImageButton
+    lateinit var wType : TextView
+    lateinit var wTime : TextView
+    lateinit var worktype : TextView
+    lateinit var worktime : TextView
+    var db: AppDatabase? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,24 +34,47 @@ class Free : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_free, container, false)
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        calendarV = view.findViewById(R.id.calendar)
+        todayDiet = view.findViewById(R.id.diet)
+        todayWorkout = view.findViewById(R.id.todayworkout)
+        bfImg = view.findViewById(R.id.breakfast)
+        lunchImg = view.findViewById(R.id.lunch)
+        dinnerImg = view.findViewById(R.id.dinner)
+        wImg = view.findViewById(R.id.workoutimg)
+        wType = view.findViewById(R.id.wtype)
+        wTime = view.findViewById(R.id.wtime)
+        worktype = view.findViewById(R.id.workoutType)
+        worktime = view.findViewById(R.id.workoutTime)
+        db = AppDatabase.getInstance(requireContext())
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Free.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Free().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
+        calendarV.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val selectedDate = "$year-$month-$dayOfMonth"
+            Log.d("date", "$selectedDate")
+//            CoroutineScope(Dispatchers.IO).launch{
+//                val dateWorkout = db?.workoutDao()?.getWorkoutByDate(year, month, dayOfMonth)
+//                if (dateWorkout != null) {
+//
+//                } else {
+//
+//                }
+//            }
+            bfImg.setOnClickListener {
+                navigateToNewBreakFast(year, month+1, dayOfMonth)
             }
+
+
+        }
+
+    }
+    private fun navigateToNewBreakFast(year:Int, month: Int, day: Int){
+        val newbreakfast = NewBreakFast(year, month, day)
+        val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.calendarFragment, newbreakfast)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+
     }
 }
