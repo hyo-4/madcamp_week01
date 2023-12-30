@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/fragment_input_data.xml -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/inputContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="@color/white"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:backgroundTint="@color/white"
+        android:clickable="true"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#F13030"
+        android:text="이미지와 텍스트 저장하기😆"
+        android:textAlignment="center"
+        android:textColor="#FF673AB7"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/imageInputView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FFFFFF"
+        android:scaleType="fitCenter" />
+
+    <Button
+        android:id="@+id/inputImageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Pick Image"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/editInputText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="Enter text" />
+
+    <Button
+        android:id="@+id/saveImageButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:text="Save" />
+    </LinearLayout>
+</FrameLayout>
