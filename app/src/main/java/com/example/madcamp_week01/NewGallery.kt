@@ -44,6 +44,7 @@ class NewGallery : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         GalleryRecyclerView = view.findViewById(R.id.recyclerNewGalleryView)
         GalleryText = view.findViewById(R.id.noGalleryData)
+        val imageCount : TextView = view.findViewById(R.id.newGalleryimageCount)
 
         db = AppDatabase.getInstance(requireContext())
         CoroutineScope(Dispatchers.IO).launch{
@@ -61,6 +62,7 @@ class NewGallery : Fragment() {
                 GalleryRecyclerView.visibility = View.VISIBLE
 
                 newGalleryAdapter = NewGalleryAdapter(contactsList)
+                imageCount.text = "${contactsList.size}개의 이미지"
                 GalleryRecyclerView.adapter = newGalleryAdapter
                 GalleryRecyclerView.layoutManager = GridLayoutManager(context,2)
             }
