@@ -34,7 +34,7 @@ class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<A
         private val numTextView: TextView = itemView.findViewById(R.id.numItem)
         fun setItem(contact:Contacts, position: Int){
             index = position
-            val sampleImage = AppCompatResources.getDrawable(itemView.context, R.drawable.contact)
+            val sampleImage = AppCompatResources.getDrawable(itemView.context, R.drawable.blankcontact)
             imageView.setImageDrawable(sampleImage)
             nameTextView.text = contact.name
             numTextView.text = contact.tel
