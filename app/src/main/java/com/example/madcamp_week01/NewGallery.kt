@@ -62,7 +62,7 @@ class NewGallery : Fragment() {
 
                 newGalleryAdapter = NewGalleryAdapter(contactsList)
                 GalleryRecyclerView.adapter = newGalleryAdapter
-                GalleryRecyclerView.layoutManager = LinearLayoutManager(context)
+                GalleryRecyclerView.layoutManager = GridLayoutManager(context,2)
             }
         }
 
