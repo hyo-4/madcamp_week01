@@ -20,7 +20,7 @@ import androidx.fragment.app.FragmentTransaction
 class InputDataFragment : Fragment() {
 
     lateinit var getResult: ActivityResultLauncher<String>
-    val newDataList = mutableListOf<NewDataItem>()
+    val newData = mutableListOf<NewDataItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,12 +32,20 @@ class InputDataFragment : Fragment() {
         val saveButton: Button = view.findViewById(R.id.saveImageButton)
         val pickImage: Button = view.findViewById(R.id.inputImageButton)
 
+        val InputText = editText.text.toString()
+        var InputImage : Uri
+
         getResult =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
                 uri?.let {
+                    requireActivity().contentResolver.takePersistableUriPermission(
+                        it,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
                     imageView.setImageURI(uri)
-                    newDataList.add(NewDataItem(it, "New Image"))
-                    Log.d("new", newDataList.toString())
+                    InputImage = uri
+                    newData.add(NewDataItem(it, InputText))
+                    Log.d("new", newData.toString())
                 }
             }
 
@@ -53,8 +61,8 @@ class InputDataFragment : Fragment() {
     }
 
     private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        intent.type = "image/*"
+//        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//        intent.type = "image/*"
         getResult.launch("image/*")
     }
 

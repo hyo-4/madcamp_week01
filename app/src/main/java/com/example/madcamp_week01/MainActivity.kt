@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var tab1:MyAddress
-    lateinit var tab2:Gallery
+    lateinit var tab2:NewGallery
     lateinit var tab3:Free
 
     private fun replaceView(tab: Fragment) {
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val tabLayout: TabLayout = findViewById(R.id.tab_layout)
         tab1 = MyAddress()
-        tab2 = Gallery()
+        tab2 = NewGallery()
         tab3 = Free()
 
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, tab1).commit()
