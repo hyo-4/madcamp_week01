@@ -90,7 +90,7 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
                 workoutTime = null,
                 workoutType = null
             )
-            db?.workoutDao()?.insertAll(newFood)
+            db?.workoutDao()?.update(newFood)
             FoodData.add(newFood)
             Log.d("newFood", newFood.toString())
         }

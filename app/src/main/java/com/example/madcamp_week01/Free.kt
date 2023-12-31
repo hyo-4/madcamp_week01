@@ -13,6 +13,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Calendar
 
 class Free : Fragment() {
@@ -72,47 +73,51 @@ class Free : Fragment() {
             val selectedDate = "$year-$month-$dayOfMonth"
             Log.d("date", "$selectedDate")
             CoroutineScope(Dispatchers.IO).launch{
-                val dateWorkout = db?.workoutDao()?.getWorkoutByDate(year, month, dayOfMonth)
+                val dateWorkout = db?.workoutDao()?.getWorkoutByDate(year, month+1, dayOfMonth)
                 var selectedWorkout: Workout? = dateWorkout?.firstOrNull()  //선택한 날짜의 workout 데이터
-                if (selectedWorkout != null) {
-                    // changing View to uploaded images
-                    // **changing 운동 이미지
-                    if (selectedWorkout.workoutImg != null){
-                        wImgV.setImageURI(selectedWorkout.workoutImg)
-                        worktypeV.text = selectedWorkout.workoutType
-                        worktimeV.text = selectedWorkout.workoutTime
-                    }else{
-                        wImgV.setImageDrawable(noWOimg)
-                        worktypeV.text = resources.getString(R.string.noexercise)
-                        worktimeV.text = resources.getString(R.string.noexercise)
+
+                withContext(Dispatchers.Main) {
+                    if (selectedWorkout != null) {
+                        // changing View to uploaded images
+                        // **changing 운동 이미지
+                        if (selectedWorkout.workoutImg != null) {
+                            wImgV.setImageURI(selectedWorkout.workoutImg)
+                            worktypeV.text = selectedWorkout.workoutType
+                            worktimeV.text = selectedWorkout.workoutTime
+                        } else {
+                            wImgV.setImageDrawable(noWOimg)
+                            worktypeV.text = resources.getString(R.string.noexercise)
+                            worktimeV.text = resources.getString(R.string.noexercise)
+                        }
+                        // **changing 아침 식단 이미지
+                        if (selectedWorkout.breakfastImg != null) {
+                            bfImgV.setImageURI(selectedWorkout.breakfastImg)
+                        } else {
+                            bfImgV.setImageDrawable(noBFimg)
+                        }
+                        // **changing 점심 식단 이미지
+                        if (selectedWorkout.lunchImg != null) {
+                            lunchImgV.setImageURI(selectedWorkout.lunchImg)
+                        } else {
+                            lunchImgV.setImageDrawable(noLimg)
+                        }
+                        // **changing 저녁 식단 이미지
+                        if (selectedWorkout.dinnerImg != null) {
+                            dinnerImgV.setImageURI(selectedWorkout.dinnerImg)
+                        } else {
+                            dinnerImgV.setImageDrawable(noDimg)
+                        }
+                        // changing View finished
+                    } else {    // 선택된 날짜에 해당하는 데이터가 없는 경우
+                        // db에 해당 날짜의 데이터를 추가
+//                        val newWorkout =
+//                            Workout(year, month + 1, dayOfMonth, null, null, null, null, null, null)
+//                        db?.workoutDao()?.insertAll(newWorkout)
+//                        wImgV.setImageDrawable(noWOimg)
+//                        bfImgV.setImageDrawable(noBFimg)
+//                        lunchImgV.setImageDrawable(noLimg)
+//                        dinnerImgV.setImageDrawable(noDimg)
                     }
-                    // **changing 아침 식단 이미지
-                    if(selectedWorkout.breakfastImg != null){
-                        bfImgV.setImageURI(selectedWorkout.breakfastImg)
-                    }else{
-                        bfImgV.setImageDrawable(noBFimg)
-                    }
-                    // **changing 점심 식단 이미지
-                    if(selectedWorkout.lunchImg != null){
-                        lunchImgV.setImageURI(selectedWorkout.lunchImg)
-                    }else{
-                        lunchImgV.setImageDrawable(noLimg)
-                    }
-                    // **changing 저녁 식단 이미지
-                    if(selectedWorkout.dinnerImg != null){
-                        dinnerImgV.setImageURI(selectedWorkout.dinnerImg)
-                    }else{
-                        dinnerImgV.setImageDrawable(noDimg)
-                    }
-                    // changing View finished
-                } else {    // 선택된 날짜에 해당하는 데이터가 없는 경우
-                    // db에 해당 날짜의 데이터를 추가
-                    val newWorkout = Workout(year, month+1, dayOfMonth, null, null, null, null, null, null)
-                    db?.workoutDao()?.insertAll(newWorkout)
-                    wImgV.setImageDrawable(noWOimg)
-                    bfImgV.setImageDrawable(noBFimg)
-                    lunchImgV.setImageDrawable(noLimg)
-                    dinnerImgV.setImageDrawable(noDimg)
                 }
             }
             bfImgV.setOnClickListener {
@@ -131,4 +136,5 @@ class Free : Fragment() {
         fragmentTransaction.commit()
 
     }
+
 }
