@@ -57,6 +57,7 @@ class NewWorkout(year:Int, month:Int, Day:Int) : Fragment() {
 
         binding.workoutSave.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch{
+                createWorkoutAndNavigateBack(inputimage)
                 navigateToCalendar()
                 CheckDataBase()
             }
@@ -76,20 +77,22 @@ class NewWorkout(year:Int, month:Int, Day:Int) : Fragment() {
 
         val worktype = binding.workTypeText.text.toString()
         val worktime = binding.WorkTimeText.text.toString()
+        val dateWorkout = db?.workoutDao()?.getWorkoutByDate(addYear, addMonth, addDay)
+        var selectedWorkout: Workout? = dateWorkout?.firstOrNull()
 
         if(worktime.isNotEmpty() && worktime.isNotEmpty()){
             val newWorkout = Workout(
                 year = addYear,
                 month = addMonth,
                 date = addDay,
-                breakfastImg = null,
-                lunchImg = null,
-                dinnerImg = null,
+                breakfastImg = selectedWorkout?.breakfastImg,
+                lunchImg = selectedWorkout?.lunchImg,
+                dinnerImg = selectedWorkout?.dinnerImg,
                 workoutImg = img,
                 workoutTime = worktime,
                 workoutType = worktype
             )
-            db?.workoutDao()?.insertAll(newWorkout)
+            db?.workoutDao()?.insertOrUpdate(newWorkout)
             WorkoutData.add(newWorkout)
             Log.d("newFood", newWorkout.toString())
         }else{

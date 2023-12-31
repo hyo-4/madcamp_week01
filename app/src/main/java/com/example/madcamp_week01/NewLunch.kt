@@ -70,20 +70,21 @@ class NewLunch(year:Int, month:Int, Day:Int) : Fragment() {
     }
 
     private fun createFoodAndNavigateBack(img: Uri?) {
-
+        val dateWorkout = db?.workoutDao()?.getWorkoutByDate(addYear, addMonth, addDay)
+        var selectedWorkout: Workout? = dateWorkout?.firstOrNull()
         if(img != null){
             val newFood = Workout(
                 year = addYear,
                 month = addMonth,
                 date = addDay,
-                breakfastImg = null,
+                breakfastImg = selectedWorkout?.breakfastImg,
                 lunchImg = img,
-                dinnerImg = null,
-                workoutImg = null,
-                workoutTime = null,
-                workoutType = null
+                dinnerImg = selectedWorkout?.dinnerImg,
+                workoutImg = selectedWorkout?.workoutImg,
+                workoutTime = selectedWorkout?.workoutTime,
+                workoutType = selectedWorkout?.workoutType
             )
-            db?.workoutDao()?.insertAll(newFood)
+            db?.workoutDao()?.insertOrUpdate(newFood)
             FoodData.add(newFood)
             Log.d("newFood", newFood.toString())
         }

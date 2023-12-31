@@ -47,14 +47,14 @@
         <EditText
             android:id="@+id/workTypeText"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:hint="운동 종류를 입력하세요"
             android:inputType="text"/>
 
         <EditText
             android:id="@+id/WorkTimeText"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:hint="운동 시간을 입력하세요"
             android:inputType="text"/>
 
