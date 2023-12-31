@@ -1,59 +1,108 @@
 package com.example.madcamp_week01
 
+import android.content.Intent
+import android.net.Uri
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [NewLunch.newInstance] factory method to
- * create an instance of this fragment.
- */
-class NewLunch : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.FragmentTransaction
+import com.example.madcamp_week01.databinding.FragmentFoodAddBinding
+import kotlinx.coroutines.CoroutineScope
+class NewLunch(year:Int, month:Int, Day:Int) : Fragment() {
+    private lateinit var binding: FragmentFoodAddBinding
+    lateinit var getLunch: ActivityResultLauncher<String>
+    var db: AppDatabase? = null
+    var FoodData = mutableListOf<Workout>()
+    var inputimage: Uri? = null
+    val selectedDate = "$year-$month-$Day"
+    val addYear = year
+    val addMonth = month
+    val addDay = Day
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food_add, container, false)
+        binding = FragmentFoodAddBinding.inflate(inflater, container, false)
+        db = AppDatabase.getInstance(requireContext())
+        Log.d("date", "$selectedDate")
+
+        getLunch =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+                uri?.let {
+                    requireActivity().contentResolver.takePersistableUriPermission(
+                        it,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                    inputimage = it
+                    binding.foodImage.setImageURI(it)
+                }
+
+            }
+
+        binding.selectfoodImg.setOnClickListener {
+            openImagePicker()
+        }
+
+        binding.foodSave.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch{
+                createFoodAndNavigateBack(inputimage)
+                navigateToCalendar()
+            }
+        }
+
+
+        return binding.root
+
+    }
+    private fun openImagePicker() {
+//        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//        intent.type = "image/*"
+        getLunch.launch("image/*")
+    }
+
+    private fun createFoodAndNavigateBack(img: Uri?) {
+
+        if(img != null){
+            val newFood = Workout(
+                year = addYear,
+                month = addMonth,
+                date = addDay,
+                breakfastImg = null,
+                lunchImg = img,
+                dinnerImg = null,
+                workoutImg = null,
+                workoutTime = null,
+                workoutType = null
+            )
+            db?.workoutDao()?.insertAll(newFood)
+            FoodData.add(newFood)
+            Log.d("newFood", newFood.toString())
+        }
+
+
+    }
+
+    private fun navigateToCalendar() {
+        // Navigate to the "my_address" fragment
+        val myCalendar = Free()
+
+        val fragmentTransaction: FragmentTransaction =
+            requireActivity().supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.addFoodPage, myCalendar)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NewLunch.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NewLunch().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        private const val PICK_IMAGE_REQUEST = 1
     }
 }

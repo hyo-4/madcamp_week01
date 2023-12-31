@@ -1,59 +1,121 @@
 package com.example.madcamp_week01
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.FragmentTransaction
+import com.example.madcamp_week01.databinding.FragmentFoodAddBinding
+import com.example.madcamp_week01.databinding.FragmentWorkoutAddBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class NewWorkout(year:Int, month:Int, Day:Int) : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NewWorkout.newInstance] factory method to
- * create an instance of this fragment.
- */
-class NewWorkout : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentWorkoutAddBinding
+    lateinit var getWorkout: ActivityResultLauncher<String>
+    var db: AppDatabase? = null
+    var WorkoutData = mutableListOf<Workout>()
+    var inputimage: Uri? = null
+    val selectedDate = "$year-$month-$Day"
+    val addYear = year
+    val addMonth = month
+    val addDay = Day
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workout_add, container, false)
+        binding = FragmentWorkoutAddBinding.inflate(inflater, container, false)
+        db = AppDatabase.getInstance(requireContext())
+        Log.d("date", "$selectedDate")
+
+        getWorkout =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+                uri?.let {
+                    requireActivity().contentResolver.takePersistableUriPermission(
+                        it,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                    inputimage = it
+                    binding.workoutImage.setImageURI(it)
+                }
+
+            }
+
+        binding.selectworkout.setOnClickListener {
+            openImagePicker()
+        }
+
+        binding.workoutSave.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch{
+                navigateToCalendar()
+                CheckDataBase()
+            }
+        }
+
+        return binding.root
+
+    }
+
+    private fun openImagePicker() {
+//        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//        intent.type = "image/*"
+        getWorkout.launch("image/*")
+    }
+
+    private fun createWorkoutAndNavigateBack(img: Uri?) {
+
+        val worktype = binding.workTypeText.text.toString()
+        val worktime = binding.WorkTimeText.text.toString()
+
+        if(worktime.isNotEmpty() && worktime.isNotEmpty()){
+            val newWorkout = Workout(
+                year = addYear,
+                month = addMonth,
+                date = addDay,
+                breakfastImg = null,
+                lunchImg = null,
+                dinnerImg = null,
+                workoutImg = img,
+                workoutTime = worktime,
+                workoutType = worktype
+            )
+            db?.workoutDao()?.insertAll(newWorkout)
+            WorkoutData.add(newWorkout)
+            Log.d("newFood", newWorkout.toString())
+        }else{
+
+        }
+
+
+    }
+
+    private fun navigateToCalendar() {
+        // Navigate to the "my_address" fragment
+        val myCalendar = Free()
+
+        val fragmentTransaction: FragmentTransaction =
+            requireActivity().supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.addWorkoutPage, myCalendar)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+    }
+
+    private fun CheckDataBase(){
+        val savedWorkout = db?.workoutDao()?.getAll()?: emptyList()
+        Log.d("savedWorkout", savedWorkout.toString())
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NewWorkout.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NewWorkout().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        private const val PICK_IMAGE_REQUEST = 1
     }
 }

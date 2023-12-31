@@ -26,6 +26,9 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
     var FoodData = mutableListOf<Workout>()
     var inputimage: Uri? = null
     val selectedDate = "$year-$month-$Day"
+    val addYear = year
+    val addMonth = month
+    val addDay = Day
 
 
     override fun onCreateView(
@@ -48,12 +51,21 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
                     binding.foodImage.setImageURI(it)
                 }
 
-                binding.selectfoodImg.setOnClickListener {
-                    openImagePicker()
-                }
-
-
             }
+
+        binding.selectfoodImg.setOnClickListener {
+            openImagePicker()
+        }
+
+        binding.foodSave.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch{
+                createFoodAndNavigateBack(inputimage)
+                navigateToCalendar()
+                CheckDataBase()
+            }
+        }
+
+
         return binding.root
 
     }
@@ -64,9 +76,25 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
         getBreakFast.launch("image/*")
     }
 
-    private fun createContactAndNavigateBack(img: Uri?) {
-        val savedContacts = db?.workoutDao()?.getAll() ?: emptyList()
-        FoodData.addAll(savedContacts)
+    private fun createFoodAndNavigateBack(img: Uri?) {
+
+        if(img != null){
+            val newFood = Workout(
+                year = addYear,
+                month = addMonth,
+                date = addDay,
+                breakfastImg = img,
+                lunchImg = null,
+                dinnerImg = null,
+                workoutImg = null,
+                workoutTime = null,
+                workoutType = null
+            )
+            db?.workoutDao()?.insertAll(newFood)
+            FoodData.add(newFood)
+            Log.d("newFood", newFood.toString())
+        }
+
 
     }
 
@@ -79,6 +107,11 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
         fragmentTransaction.replace(R.id.addFoodPage, myCalendar)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    private fun CheckDataBase(){
+        val savedFood = db?.workoutDao()?.getAll()?: emptyList()
+        Log.d("savedFood", savedFood.toString())
     }
 
     companion object {
