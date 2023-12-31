@@ -67,8 +67,6 @@ class Free : Fragment() {
         }
 
 
-
-
         calendarV.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = "$year-$month-$dayOfMonth"
             Log.d("date", "$selectedDate")
@@ -113,10 +111,10 @@ class Free : Fragment() {
 //                        val newWorkout =
 //                            Workout(year, month + 1, dayOfMonth, null, null, null, null, null, null)
 //                        db?.workoutDao()?.insertAll(newWorkout)
-//                        wImgV.setImageDrawable(noWOimg)
-//                        bfImgV.setImageDrawable(noBFimg)
-//                        lunchImgV.setImageDrawable(noLimg)
-//                        dinnerImgV.setImageDrawable(noDimg)
+                        wImgV.setImageDrawable(noWOimg)
+                        bfImgV.setImageDrawable(noBFimg)
+                        lunchImgV.setImageDrawable(noLimg)
+                        dinnerImgV.setImageDrawable(noDimg)
                     }
                 }
             }
