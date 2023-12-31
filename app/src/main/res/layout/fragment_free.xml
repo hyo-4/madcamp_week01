@@ -13,14 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/diet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="31sp"
-        android:layout_marginTop="365sp"
+        android:layout_marginTop="350sp"
         android:textSize="15sp"
         android:text="@string/todayDiet" />
 
@@ -29,7 +29,7 @@
         android:layout_width="90sp"
         android:layout_height="90sp"
         android:layout_marginStart="40sp"
-        android:layout_marginTop="395sp"
+        android:layout_marginTop="380sp"
         android:scaleType="centerCrop"
         android:background="@android:color/transparent"
         android:src="@drawable/nobreakfast" />
@@ -41,7 +41,7 @@
         android:layout_width="90sp"
         android:layout_height="90sp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="395sp"
+        android:layout_marginTop="380sp"
         android:scaleType="centerCrop"
         android:background="@android:color/transparent"
         android:src="@drawable/nolunch" />
@@ -51,7 +51,7 @@
         android:layout_width="90sp"
         android:layout_height="90sp"
         android:layout_gravity="right"
-        android:layout_marginTop="395sp"
+        android:layout_marginTop="380sp"
         android:layout_marginEnd="40sp"
         android:scaleType="centerCrop"
         android:background="@android:color/transparent"
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="31sp"
-        android:layout_marginTop="490sp"
+        android:layout_marginTop="475sp"
         android:textSize="15sp"
         android:text="@string/todayWorkout" />
 
@@ -74,7 +74,7 @@
         android:scaleType="centerCrop"
         android:background="@android:color/transparent"
         android:layout_marginStart="40sp"
-        android:layout_marginTop="515sp"
+        android:layout_marginTop="500sp"
         android:src="@drawable/noworkout" />
 
     <TextView
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="180sp"
-        android:layout_marginTop="555sp"
+        android:layout_marginTop="530sp"
         android:textSize="12sp"
         android:text="@string/exerciseType" />
 
@@ -91,16 +91,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="250sp"
-        android:layout_marginTop="555sp"
+        android:layout_marginTop="530sp"
         android:textSize="12sp"
-        android:text="(운동 종류)" />
+        android:text="@string/noexercise" />
 
     <TextView
         android:id="@+id/wtime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="180sp"
-        android:layout_marginTop="595sp"
+        android:layout_marginTop="570sp"
         android:textSize="12sp"
         android:text="@string/exerciseTime" />
 
@@ -109,8 +109,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="250sp"
-        android:layout_marginTop="595sp"
+        android:layout_marginTop="570sp"
         android:textSize="12sp"
-        android:text="(운동 시간)" />
+        android:text="@string/noexercise" />
 
 </FrameLayout>
