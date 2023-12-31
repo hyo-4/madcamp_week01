@@ -73,6 +73,7 @@ class Free : Fragment() {
             CoroutineScope(Dispatchers.IO).launch{
                 val dateWorkout = db?.workoutDao()?.getWorkoutByDate(year, month+1, dayOfMonth)
                 var selectedWorkout: Workout? = dateWorkout?.firstOrNull()  //선택한 날짜의 workout 데이터
+                Log.d("check", "$selectedWorkout")
 
                 withContext(Dispatchers.Main) {
                     if (selectedWorkout != null) {

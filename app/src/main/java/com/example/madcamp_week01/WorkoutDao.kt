@@ -2,11 +2,8 @@ package com.example.madcamp_week01
 
 
 import android.net.Uri
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import android.util.Log
+import androidx.room.*
 
 @Dao
 interface WorkoutDao {
@@ -24,4 +21,17 @@ interface WorkoutDao {
 
     @Update
     fun update(workout: Workout)
+
+    @Transaction
+    fun insertOrUpdate(workout: Workout) {
+        val existingWorkout = getWorkoutByDate(workout.year, workout.month, workout.date)
+        var check: Workout? = existingWorkout?.firstOrNull()
+        if (check != null) {
+            // Workout data already exists, update it
+            update(workout)
+        } else {
+            // Workout data does not exist, insert a new one
+            insertAll(workout)
+        }
+    }
 }
