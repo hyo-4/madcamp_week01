@@ -1,23 +1,29 @@
 package com.example.madcamp_week01
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-
+import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import android.Manifest;
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.example.madcamp_week01.databinding.AddcontactBinding
 import com.example.madcamp_week01.databinding.FragmentFoodAddBinding
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import androidx.appcompat.app.AppCompatActivity
+
 
 class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
     private lateinit var binding: FragmentFoodAddBinding
@@ -29,6 +35,7 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
     val addYear = year
     val addMonth = month
     val addDay = Day
+    private val READ_STORAGE_PERMISSION_REQUEST_CODE = 1
 
 
     override fun onCreateView(
@@ -43,10 +50,10 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
         getBreakFast =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
                 uri?.let {
-                    requireActivity().contentResolver.takePersistableUriPermission(
-                        it,
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    )
+//                    requireActivity().contentResolver.takePersistableUriPermission(
+//                        it,
+//                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                    )
                     inputimage = it
                     binding.foodImage.setImageURI(it)
                 }
@@ -73,7 +80,7 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
     private fun openImagePicker() {
 //        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
 //        intent.type = "image/*"
-        getBreakFast.launch("image/*")
+                getBreakFast.launch("image/*")
     }
 
     private fun createFoodAndNavigateBack(img: Uri?) {
