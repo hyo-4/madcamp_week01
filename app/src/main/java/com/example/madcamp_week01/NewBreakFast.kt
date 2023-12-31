@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import android.Manifest;
+import android.content.Context
 import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -50,10 +51,7 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
         getBreakFast =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
                 uri?.let {
-//                    requireActivity().contentResolver.takePersistableUriPermission(
-//                        it,
-//                        Intent.FLAG_GRANT_READ_URI_PERMISSION
-//                    )
+                    requestUriPermission(uri)
                     inputimage = it
                     binding.foodImage.setImageURI(it)
                 }
@@ -120,6 +118,19 @@ class NewBreakFast(year:Int, month:Int, Day:Int) : Fragment() {
     private fun CheckDataBase(){
         val savedFood = db?.workoutDao()?.getAll()?: emptyList()
         Log.d("savedFood", savedFood.toString())
+    }
+
+    private fun requestUriPermission(uri: Uri) {
+        try {
+            // Request persistent read permission for the URI
+            requireActivity().contentResolver.takePersistableUriPermission(
+                uri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+            Log.d("Permission", "Permission granted for URI: $uri")
+        } catch (e: SecurityException) {
+            Log.e("Permission", "Error granting permission for URI: $uri", e)
+        }
     }
 
     companion object {

@@ -78,4 +78,5 @@ class NewGallery : Fragment() {
             .addToBackStack(null)
             .commit()
     }
+
 }
