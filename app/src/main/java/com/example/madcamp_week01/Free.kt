@@ -10,6 +10,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.util.Log
 import androidx.appcompat.content.res.AppCompatResources
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -106,7 +108,10 @@ class Free : Fragment() {
                     // changing View to uploaded images
                     // **changing 운동 이미지
                     if (selectedWorkout.workoutImg != null) {
-                        wImgV.setImageURI(selectedWorkout.workoutImg)
+                        Glide.with(requireContext())
+                            .load(selectedWorkout.workoutImg)
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(wImgV)
                         worktypeV.text = selectedWorkout.workoutType
                         worktimeV.text = selectedWorkout.workoutTime
                     } else {
@@ -116,19 +121,28 @@ class Free : Fragment() {
                     }
                     // **changing 아침 식단 이미지
                     if (selectedWorkout.breakfastImg != null) {
-                        bfImgV.setImageURI(selectedWorkout.breakfastImg)
+                        Glide.with(requireContext())
+                            .load(selectedWorkout.breakfastImg)
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(bfImgV)
                     } else {
                         bfImgV.setImageDrawable(noBFimg)
                     }
                     // **changing 점심 식단 이미지
                     if (selectedWorkout.lunchImg != null) {
-                        lunchImgV.setImageURI(selectedWorkout.lunchImg)
+                        Glide.with(requireContext())
+                            .load(selectedWorkout.lunchImg)
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(lunchImgV)
                     } else {
                         lunchImgV.setImageDrawable(noLimg)
                     }
                     // **changing 저녁 식단 이미지
                     if (selectedWorkout.dinnerImg != null) {
-                        dinnerImgV.setImageURI(selectedWorkout.dinnerImg)
+                        Glide.with(requireContext())
+                            .load(selectedWorkout.dinnerImg)
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(dinnerImgV)
                     } else {
                         dinnerImgV.setImageDrawable(noDimg)
                     }

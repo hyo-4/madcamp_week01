@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
+import com.bumptech.glide.Glide
 
 class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<AddressAdapter.Holder>() {
 
@@ -36,7 +37,7 @@ class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<A
             index = position
 
             if(contact.image != null){
-                imageView.setImageURI(contact.image)
+                Glide.with(itemView.context).load(contact.image).into(imageView)
                 nameTextView.text = contact.name
                 numTextView.text = contact.tel
             }else{

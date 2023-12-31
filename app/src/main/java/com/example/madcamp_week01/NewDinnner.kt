@@ -43,10 +43,10 @@ class NewDinnner(year:Int, month:Int, Day:Int) : Fragment() {
         getDinner =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
                 uri?.let {
-                    requireActivity().contentResolver.takePersistableUriPermission(
-                        it,
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    )
+//                    requireActivity().contentResolver.takePersistableUriPermission(
+//                        it,
+//                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                    )
                     inputimage = it
                     binding.foodImage.setImageURI(it)
                 }

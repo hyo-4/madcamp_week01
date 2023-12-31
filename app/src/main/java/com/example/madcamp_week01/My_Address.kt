@@ -41,10 +41,10 @@ class MyAddress : Fragment() {
 
             if (contactsList.isEmpty()) {
                 noAddressDataTextView.visibility = View.VISIBLE
-                recyclerV.visibility = View.GONE
+                recyclerV.visibility = View.INVISIBLE
             } else {
 
-                    noAddressDataTextView.visibility = View.GONE
+                    noAddressDataTextView.visibility = View.INVISIBLE
                     recyclerV.visibility = View.VISIBLE
 
                     adapter = AddressAdapter(contactsList)

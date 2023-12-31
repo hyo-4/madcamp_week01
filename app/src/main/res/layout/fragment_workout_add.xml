@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/workoutImage"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="252dp"
+            android:layout_height="225dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
