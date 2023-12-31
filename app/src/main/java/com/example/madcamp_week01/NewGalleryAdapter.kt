@@ -16,7 +16,7 @@ import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import com.bumptech.glide.Glide
 
-class NewGalleryAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<NewGalleryAdapter.ContactViewHolder>() {
+class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<NewGalleryAdapter.ContactViewHolder>() {
 
     lateinit var galleryContext: Context
 
@@ -25,21 +25,14 @@ class NewGalleryAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapte
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
         val textView: TextView =itemView.findViewById(R.id.textView)
 
-        fun bind(contact: Contacts, position: Int) {
+        fun bind(workout: Workout, position: Int) {
             index = position
 
-            if (contact.image != null) {
+            if (workout.breakfastImg != null) {
                 // Load image using Glide
-                textView.text = contact.name
                 Glide.with(itemView.context)
-                    .load(contact.image)
+                    .load(workout.breakfastImg)
                     .into(imageView)
-                imageView.setOnClickListener {
-                    showImagePopup(contact.name, contact.image!!)
-                }
-            } else {
-                val sampleImage = AppCompatResources.getDrawable(itemView.context, R.drawable.blankcontact)
-                imageView.setImageDrawable(sampleImage)
             }
         }
 
@@ -78,11 +71,11 @@ class NewGalleryAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-       holder.bind(contactsList!![position], position)
+       holder.bind(WorkoutList!![position], position)
     }
 
     override fun getItemCount(): Int {
-        return contactsList?.size ?: 0
+        return WorkoutList?.size ?: 0
     }
 
 

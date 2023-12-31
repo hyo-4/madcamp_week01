@@ -48,12 +48,12 @@ class NewGallery : Fragment() {
 
         db = AppDatabase.getInstance(requireContext())
         CoroutineScope(Dispatchers.IO).launch{
-            val savedContacts = db?.contactsDao()?.getAll() ?: emptyList()
+            val savedContacts = db?.workoutDao()?.getAll() ?: emptyList()
             Log.d("savedContacts", "contacts: $savedContacts")
-            var contactsList = mutableListOf<Contacts>()
-            contactsList.addAll(savedContacts)
+            var WorkoutList = mutableListOf<Workout>()
+            WorkoutList.addAll(savedContacts)
 
-            if (contactsList.isEmpty()) {
+            if (WorkoutList.isEmpty()) {
                 GalleryText.visibility = View.VISIBLE
                 GalleryRecyclerView.visibility = View.GONE
             } else {
@@ -61,18 +61,13 @@ class NewGallery : Fragment() {
                 GalleryText.visibility = View.GONE
                 GalleryRecyclerView.visibility = View.VISIBLE
 
-                newGalleryAdapter = NewGalleryAdapter(contactsList)
-                imageCount.text = "${contactsList.size}개의 이미지"
+                newGalleryAdapter = NewGalleryAdapter(WorkoutList)
+                imageCount.text = "${WorkoutList.size}개의 이미지"
                 GalleryRecyclerView.adapter = newGalleryAdapter
                 GalleryRecyclerView.layoutManager = GridLayoutManager(context,2)
             }
         }
 
-
-        val plusButton: Button = view.findViewById(R.id.newGalleryImageButton)
-        plusButton.setOnClickListener {
-            navigateToAddContactFragment()
-        }
     }
 
     private fun navigateToAddContactFragment() {
