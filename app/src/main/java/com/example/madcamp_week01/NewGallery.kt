@@ -74,18 +74,20 @@ class NewGallery : Fragment() {
             DietBtn.setOnClickListener{
                 val filteredList = mutableListOf<Workout>()
                 for (workout in WorkoutList) {
-                    val filteredWorkout = Workout(
-                        year = workout.year,
-                        month = workout.month,
-                        date = workout.date,
-                        breakfastImg = workout.breakfastImg,
-                        lunchImg = workout.lunchImg,
-                        dinnerImg = workout.dinnerImg,
-                        workoutType = null,
-                        workoutTime = null,
-                        workoutImg = null,
-                    )
-                    filteredList.add(filteredWorkout)
+                    if (workout.breakfastImg != null || workout.lunchImg != null || workout.dinnerImg != null) {
+                        val filteredWorkout = Workout(
+                            year = workout.year,
+                            month = workout.month,
+                            date = workout.date,
+                            breakfastImg = workout.breakfastImg,
+                            lunchImg = workout.lunchImg,
+                            dinnerImg = workout.dinnerImg,
+                            workoutType = null,
+                            workoutTime = null,
+                            workoutImg = null,
+                        )
+                        filteredList.add(filteredWorkout)
+                    }
                 }
                 newGalleryAdapter = NewGalleryAdapter(filteredList)
                 GalleryRecyclerView.adapter = newGalleryAdapter
@@ -95,18 +97,20 @@ class NewGallery : Fragment() {
             ExerciseBtn.setOnClickListener{
                 val filteredList2 = mutableListOf<Workout>()
                 for (workout in WorkoutList) {
-                    val filteredWorkout = Workout(
-                        year = workout.year,
-                        month = workout.month,
-                        date = workout.date,
-                        breakfastImg = null,
-                        lunchImg = null,
-                        dinnerImg = null,
-                        workoutType = workout.workoutType,
-                        workoutTime = workout.workoutTime,
-                        workoutImg = workout.workoutImg,
-                    )
-                    filteredList2.add(filteredWorkout)
+                    if(workout.workoutImg != null) {
+                        val filteredWorkout = Workout(
+                            year = workout.year,
+                            month = workout.month,
+                            date = workout.date,
+                            breakfastImg = null,
+                            lunchImg = null,
+                            dinnerImg = null,
+                            workoutType = workout.workoutType,
+                            workoutTime = workout.workoutTime,
+                            workoutImg = workout.workoutImg,
+                        )
+                        filteredList2.add(filteredWorkout)
+                    }
                 }
                 newGalleryAdapter = NewGalleryAdapter(filteredList2)
                 GalleryRecyclerView.adapter = newGalleryAdapter
