@@ -9,11 +9,10 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.madcamp_week01.databinding.ContactdetailBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.example.madcamp_week01.databinding.ContactdetailBinding
 
 class ContactDetail(private val contact: Contacts) : Fragment() {
     private lateinit var binding: ContactdetailBinding
@@ -36,6 +35,7 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
         binding.section.visibility = View.VISIBLE
         binding.namedetail.visibility = View.VISIBLE
         binding.profiletag.visibility = View.VISIBLE
+        binding.delbutton.visibility = View.VISIBLE
 
         binding.namedetail.text = contact.name
         binding.phonenum.text = contact.tel
@@ -62,6 +62,7 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
         binding.section.visibility = View.INVISIBLE
         binding.namedetail.visibility = View.INVISIBLE
         binding.profiletag.visibility = View.INVISIBLE
+        binding.delbutton.visibility = View.INVISIBLE
 
         val fragmentTransaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.profilepage, myAddressFragment)

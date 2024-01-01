@@ -8,10 +8,22 @@
     android:background="#FFFFFF"
     tools:context=".MyAddress">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:text="@string/address"
+        android:fontFamily="@font/myfont"
+        android:textColor="#000000"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="24dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:background="#FFFFFF"
         app:layoutManager="LinearLayoutManager" />
 
