@@ -52,20 +52,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="이미지 개수"
             android:textColor="#392467"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="327dp"
             tools:layout_editor_absoluteY="33dp" />
 
         <Button
-            android:id="@+id/newGalleryImageButton"
+            android:id="@+id/newGalleryFoodButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="40dp"
-            android:text="이미지 추가"
+            android:layout_marginBottom="156dp"
+            android:text="식단"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="UnknownId" />
+
+        <Button
+            android:id="@+id/newGalleryWorkoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="96dp"
+            android:text="운동"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="UnknownId" />

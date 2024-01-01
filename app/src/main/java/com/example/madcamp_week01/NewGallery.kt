@@ -62,9 +62,10 @@ class NewGallery : Fragment() {
                 GalleryRecyclerView.visibility = View.VISIBLE
 
                 newGalleryAdapter = NewGalleryAdapter(WorkoutList)
-                imageCount.text = "${WorkoutList.size}개의 이미지"
                 GalleryRecyclerView.adapter = newGalleryAdapter
-                GalleryRecyclerView.layoutManager = GridLayoutManager(context,2)
+                GalleryRecyclerView.layoutManager = LinearLayoutManager(context)
+
+
             }
         }
 
