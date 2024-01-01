@@ -30,6 +30,8 @@ class NewGallery : Fragment() {
     private var newGalleryAdapter: NewGalleryAdapter? = null
     lateinit var GalleryRecyclerView: RecyclerView
     lateinit var GalleryText: TextView
+    lateinit var DietBtn : ImageButton
+    lateinit var ExerciseBtn : ImageButton
     var db: AppDatabase? = null
 
     override fun onCreateView(
@@ -44,7 +46,9 @@ class NewGallery : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         GalleryRecyclerView = view.findViewById(R.id.recyclerNewGalleryView)
         GalleryText = view.findViewById(R.id.noGalleryData)
-        val imageCount : TextView = view.findViewById(R.id.newGalleryimageCount)
+        DietBtn = view.findViewById(R.id.btnFilterDiet)
+        ExerciseBtn = view.findViewById(R.id.btnFilterExercise)
+
 
         db = AppDatabase.getInstance(requireContext())
         CoroutineScope(Dispatchers.IO).launch{
@@ -65,7 +69,48 @@ class NewGallery : Fragment() {
                 GalleryRecyclerView.adapter = newGalleryAdapter
                 GalleryRecyclerView.layoutManager = LinearLayoutManager(context)
 
+            }
 
+            DietBtn.setOnClickListener{
+                val filteredList = mutableListOf<Workout>()
+                for (workout in WorkoutList) {
+                    val filteredWorkout = Workout(
+                        year = workout.year,
+                        month = workout.month,
+                        date = workout.date,
+                        breakfastImg = workout.breakfastImg,
+                        lunchImg = workout.lunchImg,
+                        dinnerImg = workout.dinnerImg,
+                        workoutType = null,
+                        workoutTime = null,
+                        workoutImg = null,
+                    )
+                    filteredList.add(filteredWorkout)
+                }
+                newGalleryAdapter = NewGalleryAdapter(filteredList)
+                GalleryRecyclerView.adapter = newGalleryAdapter
+                GalleryRecyclerView.layoutManager = LinearLayoutManager(context)
+            }
+
+            ExerciseBtn.setOnClickListener{
+                val filteredList2 = mutableListOf<Workout>()
+                for (workout in WorkoutList) {
+                    val filteredWorkout = Workout(
+                        year = workout.year,
+                        month = workout.month,
+                        date = workout.date,
+                        breakfastImg = null,
+                        lunchImg = null,
+                        dinnerImg = null,
+                        workoutType = workout.workoutType,
+                        workoutTime = workout.workoutTime,
+                        workoutImg = workout.workoutImg,
+                    )
+                    filteredList2.add(filteredWorkout)
+                }
+                newGalleryAdapter = NewGalleryAdapter(filteredList2)
+                GalleryRecyclerView.adapter = newGalleryAdapter
+                GalleryRecyclerView.layoutManager = LinearLayoutManager(context)
             }
         }
 
