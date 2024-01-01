@@ -1,8 +1,12 @@
 package com.example.madcamp_week01
 
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
+import android.Manifest;
 import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() {

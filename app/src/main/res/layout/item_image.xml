@@ -1,23 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop" />
-
-    <TextView
-        android:id="@+id/textView"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="식단"
-        android:textSize="16sp" />
+        android:layout_margin="20dp"
+        android:radius="10dp">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dateView"
+                android:layout_marginLeft="40dp"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="빈 텍스트"/>
+
+            <TextView
+                android:id="@+id/breakfastText"
+                android:layout_marginLeft="40dp"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="아침"/>
+
+            <ImageView
+                android:id="@+id/breakfastView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/rounded_border"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/lunchText"
+                android:layout_marginLeft="40dp"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="점심"/>
+
+
+            <ImageView
+                android:id="@+id/lunchView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/rounded_border"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/dinnerText"
+                android:layout_marginLeft="40dp"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="저녁"/>
+
+
+            <ImageView
+                android:id="@+id/dinnerView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/rounded_border"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/WorkoutText"
+                android:layout_marginLeft="40dp"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="운동"/>
+
+
+            <ImageView
+                android:id="@+id/workoutView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/rounded_border"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/WorkoutDetailText"
+                android:layout_marginLeft="40dp"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="운동 세부 내역"/>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

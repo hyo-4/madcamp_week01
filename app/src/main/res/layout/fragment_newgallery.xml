@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:id="@+id/fragmentNewGallery"
-    android:background="#FFFFFF"
     tools:context=".Gallery">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,26 +19,28 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
+            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="Gallery"
+            android:textColor="#FFFFFF"
             android:textAlignment="center"
-            android:textColor="#673AB7"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
+            tools:layout_editor_absoluteY="16dp" />
 
         <TextView
             android:id="@+id/noGalleryData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="#FFFFFF"
             android:text="No Data"
             android:textSize="30sp"
-            app:layout_constraintTop_toBottomOf="@id/textView2"
             app:layout_constraintBottom_toTopOf="@id/recyclerNewGalleryView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/textView2" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerNewGalleryView"
@@ -47,28 +49,36 @@
             android:layout_marginTop="70dp" />
 
 
-        <TextView
-            android:id="@+id/newGalleryimageCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="이미지 개수"
-            android:textColor="#392467"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="327dp"
-            tools:layout_editor_absoluteY="33dp" />
-
-        <Button
-            android:id="@+id/newGalleryImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="40dp"
-            android:text="이미지 추가"
+        <ImageButton
+            android:id="@+id/btnFilterDiet"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/circular_button_background"
+            android:src="@drawable/img1"
+            android:text="Diet"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="UnknownId" />
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="20dp"
+            android:textColor="#000000"
+            android:elevation="4dp" />
+
+        <ImageButton
+            android:id="@+id/btnFilterExercise"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/circular_button_background"
+            android:text="Exercise"
+            android:src="@drawable/diet1"
+            app:layout_constraintBottom_toTopOf="@id/btnFilterDiet"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000000"
+            android:elevation="4dp" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
