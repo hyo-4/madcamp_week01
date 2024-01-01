@@ -124,18 +124,27 @@
         app:layout_constraintStart_toStartOf="@id/phonenumtitle"
         app:layout_constraintTop_toBottomOf="@id/phonenumtitle" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/delbutton"
         android:layout_width="256dp"
         android:layout_height="48dp"
-        android:scaleType="fitXY"
-        android:text="@string/delete"
         android:background="@drawable/deletebutton"
-        android:src="@drawable/clicktodelete"
         android:layout_marginBottom="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:elevation="5dp"
+        android:text="@string/delete"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/myfont"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:shadowColor="#F34235"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="15"
+        android:drawableLeft="@drawable/del"
+        android:drawablePadding="-65dp"        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
