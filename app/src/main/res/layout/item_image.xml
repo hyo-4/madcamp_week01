@@ -25,6 +25,7 @@
                 android:layout_width="400dp"
                 android:layout_height="40dp"
                 android:textSize="18sp"
+                android:fontFamily="@font/myfont"
                 android:textStyle="bold"
                 android:text="빈 텍스트"/>
 
@@ -35,6 +36,7 @@
                 android:layout_width="400dp"
                 android:layout_height="40dp"
                 android:textSize="18sp"
+                android:fontFamily="@font/myfont"
                 android:textStyle="bold"
                 android:text="☀️ 아침 ☀️"/>
 
@@ -74,6 +76,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_height="40dp"
                 android:textSize="18sp"
+                android:fontFamily="@font/myfont"
                 android:textStyle="bold"
                 android:text="🌙 저녁 🌙"/>
 
@@ -93,6 +96,7 @@
                 android:layout_width="400dp"
                 android:layout_marginTop="10dp"
                 android:layout_height="40dp"
+                android:fontFamily="@font/myfont"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:text="🏃 운동 🏃"/>
@@ -114,6 +118,7 @@
                 android:layout_height="40dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/myfont4"
                 android:gravity="center"
                 android:text="운동 세부 내역"/>
 
