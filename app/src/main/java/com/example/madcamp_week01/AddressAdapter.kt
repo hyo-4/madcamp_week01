@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 
 class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<AddressAdapter.Holder>() {
@@ -45,6 +47,16 @@ class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<A
                 imageView.setImageDrawable(sampleImage)
                 nameTextView.text = contact.name
                 numTextView.text = contact.tel
+            }
+
+            itemView.setOnClickListener {
+                val contactdetail = ContactDetail(contact)
+
+                // Replace the current fragment with ContactDetailFragment
+                val fragmentTransaction = (itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragmentContainer, contactdetail)
+                fragmentTransaction.addToBackStack(null) // Optional: Adds the transaction to the back stack
+                fragmentTransaction.commit()
             }
         }
     }
