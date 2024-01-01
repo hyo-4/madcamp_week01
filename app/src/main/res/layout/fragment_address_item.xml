@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF" >
+    android:background="@drawable/selecteffect" >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="30sp"
-        android:layout_marginTop="30sp"
+        android:layout_marginTop="15sp"
+        android:layout_marginBottom="15sp"
         android:src="@drawable/contact" />
 
     <TextView
@@ -18,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30sp"
+        android:layout_marginTop="15sp"
         android:layout_toEndOf="@+id/imageView"
         android:text="name"
         android:textSize="20sp" />
