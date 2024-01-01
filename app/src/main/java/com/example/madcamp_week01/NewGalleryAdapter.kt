@@ -1,20 +1,16 @@
 package com.example.madcamp_week01
 
-import android.app.Dialog
 import androidx.recyclerview.widget.RecyclerView
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.ImageView
-import com.google.android.material.button.MaterialButton
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 
 class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<NewGalleryAdapter.ContactViewHolder>() {
@@ -44,6 +40,10 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
                 workoutView.visibility = View.VISIBLE
                 detailTextView.visibility= View.VISIBLE
                 detailTextView.text = "${workout.workoutTime} 동안 ${workout.workoutType} 했어요"
+                workoutImageView.setOnClickListener {
+                   showDetailFragment(workout.workoutImg!!)
+                }
+
             } ?: run {
                 workoutImageView.visibility = View.GONE
                 workoutView.visibility = View.GONE
@@ -55,6 +55,9 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
                 Glide.with(itemView.context).load(it).into(breakfastImageView)
                 breakfastImageView.visibility = View.VISIBLE
                 breakfastView.visibility = View.VISIBLE
+                breakfastImageView.setOnClickListener {
+                    showDetailFragment(workout.breakfastImg!!)
+                }
             } ?: run {
                 breakfastImageView.visibility = View.GONE
                 breakfastView.visibility = View.GONE
@@ -65,6 +68,9 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
                 Glide.with(itemView.context).load(it).into(lunchImageView)
                 lunchImageView.visibility = View.VISIBLE
                 lunchView.visibility= View.VISIBLE
+                lunchImageView.setOnClickListener {
+                    showDetailFragment(workout.lunchImg!!)
+                }
             } ?: run {
                 lunchImageView.visibility = View.GONE
                 lunchView.visibility= View.GONE
@@ -75,6 +81,9 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
                 Glide.with(itemView.context).load(it).into(dinnerImageView)
                 dinnerImageView.visibility = View.VISIBLE
                 dinnerView.visibility = View.VISIBLE
+                dinnerImageView.setOnClickListener {
+                    showDetailFragment(workout.dinnerImg!!)
+                }
             } ?: run {
                 dinnerImageView.visibility = View.GONE
                 dinnerView.visibility = View.GONE
@@ -84,11 +93,21 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
 
         }
 
+        private fun showDetailFragment(image:Uri) {
+            val detailFragment = GalleryDetail(image)
+
+            val fragmentTransaction = (itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragmentNewGallery, detailFragment)
+            fragmentTransaction.addToBackStack(null) // Optional: Adds the transaction to the back stack
+            fragmentTransaction.commit()
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         galleryContext = parent.context
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
+
         return ContactViewHolder(view)
     }
 
