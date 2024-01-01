@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="5dp"
         android:radius="10dp">
 
         <LinearLayout
@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -29,12 +30,13 @@
 
             <TextView
                 android:id="@+id/breakfastText"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="400dp"
                 android:layout_height="40dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:text="아침"/>
+                android:text="☀️ 아침 ☀️"/>
 
             <ImageView
                 android:id="@+id/breakfastView"
@@ -47,12 +49,13 @@
 
             <TextView
                 android:id="@+id/lunchText"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="400dp"
                 android:layout_height="40dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:text="점심"/>
+                android:text="🍚 점심 🍚"/>
 
 
             <ImageView
@@ -66,12 +69,13 @@
 
             <TextView
                 android:id="@+id/dinnerText"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="50dp"
                 android:layout_width="400dp"
+                android:layout_marginTop="10dp"
                 android:layout_height="40dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:text="저녁"/>
+                android:text="🌙 저녁 🌙"/>
 
 
             <ImageView
@@ -85,12 +89,13 @@
 
             <TextView
                 android:id="@+id/WorkoutText"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="50dp"
                 android:layout_width="400dp"
+                android:layout_marginTop="10dp"
                 android:layout_height="40dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:text="운동"/>
+                android:text="🏃 운동 🏃"/>
 
 
             <ImageView
@@ -109,6 +114,7 @@
                 android:layout_height="40dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:gravity="center"
                 android:text="운동 세부 내역"/>
 
 
