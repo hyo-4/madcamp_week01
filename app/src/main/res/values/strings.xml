@@ -19,4 +19,6 @@
     <string name="tagprofile">(Add a tag for your friend)</string>
     <string name="delete">Delete this address</string>
     <string name="phonetitle">phone</string>
+    <string name="alarm">Delete</string>
+    <string name="alarmtext">The address will be removed permanently</string>
 </resources>

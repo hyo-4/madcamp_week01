@@ -8,5 +8,6 @@ data class Contacts(
     @PrimaryKey(autoGenerate = true) val id:Long,
     var image: Uri?,
     var name: String,
+    var tag: String,
     var tel: String
 )
