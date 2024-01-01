@@ -1,20 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profilepage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/profileimg"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/profileimage"
+        android:clipToOutline="true"
+        android:src="@drawable/blankimage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/namedetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contacts Detail"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:elevation="21dp"
+        android:text="@string/profilename"
+        android:textColor="#000000"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintBottom_toBottomOf="@+id/section"
+        app:layout_constraintTop_toTopOf="@+id/section"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/profiletag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="21dp"
+        android:text="@string/tagprofile"
+        android:textColor="#8A8A8A"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/section"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/section"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <View
+        android:id="@+id/section"
+        android:layout_width="256dp"
+        android:layout_height="130dp"
+        android:elevation="20dp"
+        android:background="@drawable/sectionframe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileimg"
+        app:layout_constraintBottom_toBottomOf="@+id/profileimg" />
+
+    <ImageButton
+        android:id="@+id/callbutton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/call"
+        app:layout_constraintEnd_toStartOf="@id/messagebutton"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/section" />
+
+    <ImageButton
+        android:id="@+id/messagebutton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/section" />
+
+    <ImageButton
+        android:id="@+id/facetimebutton"
+        android:layout_width="38dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/facetime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toEndOf="@id/messagebutton"
+        app:layout_constraintTop_toBottomOf="@+id/section" />
+
+    <TextView
+        android:id="@+id/phonenumtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/phonetitle"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/section"
+        app:layout_constraintTop_toBottomOf="@id/messagebutton" />
+
+    <TextView
+        android:id="@+id/phonenum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="010-0000-0000"
+        android:textColor="#8A8A8A"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="@id/phonenumtitle"
+        app:layout_constraintTop_toBottomOf="@id/phonenumtitle" />
+
+    <ImageButton
+        android:id="@+id/delbutton"
+        android:layout_width="256dp"
+        android:layout_height="48dp"
+        android:scaleType="fitXY"
+        android:text="@string/delete"
+        android:background="@drawable/deletebutton"
+        android:src="@drawable/clicktodelete"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

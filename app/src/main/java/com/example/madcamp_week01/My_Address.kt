@@ -66,8 +66,8 @@ class MyAddress : Fragment() {
 
         // Replace the current fragment with the AddContact fragment
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, addContactFragment)
-        fragmentTransaction.addToBackStack(null) // Optional: Adds the transaction to the back stack
+        fragmentTransaction.add(R.id.fragmentContainer, addContactFragment)
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
 }

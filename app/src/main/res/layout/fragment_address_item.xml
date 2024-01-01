@@ -19,10 +19,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15sp"
+        android:layout_marginTop="18sp"
         android:layout_toEndOf="@+id/imageView"
         android:text="name"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:fontFamily="@font/myfont"
+        />
 
     <TextView
         android:id="@+id/numItem"
@@ -31,6 +33,7 @@
         android:layout_below="@+id/nameItem"
         android:layout_alignLeft="@+id/nameItem"
         android:textSize="15sp"
-        android:text="000-0000-0000" />
+        android:text="000-0000-0000"
+        android:fontFamily="@font/myfont4" />
 
 </RelativeLayout>

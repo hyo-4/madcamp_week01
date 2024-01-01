@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -54,7 +55,15 @@ class AddContactFragment : Fragment() {
                 navigateToMyAddressFragment()
             }
         }
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            navigateToMyAddressFragment()
+        }
     }
 
     private fun openImagePicker() {
@@ -92,7 +101,7 @@ class AddContactFragment : Fragment() {
         val myAddressFragment = MyAddress()
 
         val fragmentTransaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.addcontactpage, myAddressFragment)
+        fragmentTransaction.add(R.id.addcontactpage, myAddressFragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
