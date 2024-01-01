@@ -5,14 +5,26 @@
     android:id="@+id/fragmentContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#3E3E3E"
     tools:context=".MyAddress">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#3E3E3E"
+        android:text="@string/address"
+        android:fontFamily="@font/myfont"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="24dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:layout_marginTop="50dp"
+        android:background="#3E3E3E"
         app:layoutManager="LinearLayoutManager" />
 
     <TextView

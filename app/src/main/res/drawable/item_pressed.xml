@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#CCCCCC" /> <!-- Adjust the color as needed -->
-</shape>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#CCCCCC"> <!-- Ripple Effect 색상 -->
+
+<!--    &lt;!&ndash; 배경색 &ndash;&gt;-->
+<!--    <item android:id="@android:id/background">-->
+<!--        <shape android:shape="rectangle">-->
+<!--            <solid android:color="#CCCCCC"/>-->
+<!--        </shape>-->
+<!--    </item>-->
+
+</ripple>

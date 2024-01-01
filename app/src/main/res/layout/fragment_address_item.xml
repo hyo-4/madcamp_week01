@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/selecteffect" >
+    android:layout_marginTop="5dp"
+    android:background="@drawable/selecteffect"
+    android:clipToOutline="true">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
