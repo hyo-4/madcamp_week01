@@ -1,44 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:radius="10dp">
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        >
 
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/dateView"
-                android:layout_marginLeft="40dp"
                 android:layout_width="400dp"
                 android:layout_height="40dp"
-                android:textSize="18sp"
+                android:layout_marginLeft="40dp"
                 android:fontFamily="@font/myfont"
-                android:textStyle="bold"
-                android:text="빈 텍스트"/>
+                android:text="빈 텍스트"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/breakfastText"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
                 android:layout_width="400dp"
                 android:layout_height="40dp"
-                android:textSize="18sp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/myfont"
-                android:textStyle="bold"
-                android:text="☀️ 아침 ☀️"/>
+                android:text="☀️ 아침 ☀️"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/breakfastView"
@@ -47,17 +52,18 @@
                 android:layout_margin="5dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_border"
+                android:clipToOutline="true"
                 android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/lunchText"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="10dp"
                 android:layout_width="400dp"
                 android:layout_height="40dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="10dp"
+                android:text="🍚 점심 🍚"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="🍚 점심 🍚"/>
+                android:textStyle="bold" />
 
 
             <ImageView
@@ -67,18 +73,19 @@
                 android:layout_margin="5dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_border"
+                android:clipToOutline="true"
                 android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/dinnerText"
-                android:layout_marginLeft="50dp"
                 android:layout_width="400dp"
-                android:layout_marginTop="10dp"
                 android:layout_height="40dp"
-                android:textSize="18sp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/myfont"
-                android:textStyle="bold"
-                android:text="🌙 저녁 🌙"/>
+                android:text="🌙 저녁 🌙"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
             <ImageView
@@ -88,18 +95,19 @@
                 android:layout_margin="5dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_border"
+                android:clipToOutline="true"
                 android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/WorkoutText"
-                android:layout_marginLeft="50dp"
                 android:layout_width="400dp"
-                android:layout_marginTop="10dp"
                 android:layout_height="40dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/myfont"
+                android:text="🏃 운동 🏃"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="🏃 운동 🏃"/>
+                android:textStyle="bold" />
 
 
             <ImageView
@@ -109,18 +117,19 @@
                 android:layout_margin="5dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_border"
+                android:clipToOutline="true"
                 android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/WorkoutDetailText"
-                android:layout_marginLeft="40dp"
                 android:layout_width="400dp"
                 android:layout_height="40dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:layout_marginLeft="40dp"
                 android:fontFamily="@font/myfont4"
                 android:gravity="center"
-                android:text="운동 세부 내역"/>
+                android:text="운동 세부 내역"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
