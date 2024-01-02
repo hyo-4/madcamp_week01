@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import java.util.concurrent.Flow
 
 @Dao
 interface ContactsDao {
@@ -20,4 +21,7 @@ interface ContactsDao {
 
     @Update
     fun update(contacts: Contacts)
+
+    @Query("SELECT * FROM tb_contacts WHERE name LIKE :searchQuery OR tel LIKE :searchQuery")
+    fun searchContact(searchQuery:String): List<Contacts>
 }
