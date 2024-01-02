@@ -72,7 +72,9 @@ class NewGallery : Fragment() {
             }
 
             DietBtn.setOnClickListener{
+                //workoutList 자체에 접근하면 그 데이터가 수정되기 때문에 filteredList를 새로 생성해서 workoutList에 복사본을 만들고, 그 복사본에 필요한 img 빼고는 null로 바꾼다.
                 val filteredList = mutableListOf<Workout>()
+
                 for (workout in WorkoutList) {
                     if (workout.breakfastImg != null || workout.lunchImg != null || workout.dinnerImg != null) {
                         val filteredWorkout = Workout(
