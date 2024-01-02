@@ -10,8 +10,11 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.util.Log
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.madcamp_week01.databinding.AddcontactBinding
+import com.example.madcamp_week01.databinding.WorkoutBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,17 +22,7 @@ import kotlinx.coroutines.withContext
 import java.util.Calendar
 
 class Free : Fragment() {
-    lateinit var calendarV : CalendarView
-    lateinit var todayDietV : TextView
-    lateinit var todayWorkoutV : TextView
-    lateinit var bfImgV : ImageButton
-    lateinit var lunchImgV : ImageButton
-    lateinit var dinnerImgV : ImageButton
-    lateinit var wImgV : ImageButton
-    lateinit var wTypeV : TextView
-    lateinit var wTimeV : TextView
-    lateinit var worktypeV : TextView
-    lateinit var worktimeV : TextView
+    private lateinit var binding: WorkoutBinding
     var db: AppDatabase? = null
 
     override fun onCreateView(
@@ -37,21 +30,13 @@ class Free : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_free, container, false)
+        binding = WorkoutBinding.inflate(inflater, container, false)
+        binding.bottomsheet.visibility = View.VISIBLE
+
+        return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        calendarV = view.findViewById(R.id.calendar)
-        todayDietV = view.findViewById(R.id.diet)
-        todayWorkoutV = view.findViewById(R.id.todayworkout)
-        bfImgV = view.findViewById(R.id.breakfast)
-        lunchImgV = view.findViewById(R.id.lunch)
-        dinnerImgV = view.findViewById(R.id.dinner)
-        wImgV = view.findViewById(R.id.workoutimg)
-        wTypeV = view.findViewById(R.id.wtype)
-        wTimeV = view.findViewById(R.id.wtime)
-        worktypeV = view.findViewById(R.id.workoutType)
-        worktimeV = view.findViewById(R.id.workoutTime)
         db = AppDatabase.getInstance(requireContext())
 
         val todayCalendar = Calendar.getInstance()
@@ -60,44 +45,49 @@ class Free : Fragment() {
         val todayDay = todayCalendar.get(Calendar.DAY_OF_MONTH)
         showView(todayYear, todayMonth, todayDay)
 
-        bfImgV.setOnClickListener {
+        binding.breakfast.setOnClickListener {
+            binding.bottomsheet.visibility = View.INVISIBLE
             navigateToNewBreakFast(todayYear, todayMonth, todayDay)
         }
-        lunchImgV.setOnClickListener {
+        binding.lunch.setOnClickListener {
+            binding.bottomsheet.visibility = View.INVISIBLE
             navigateToNewLunch(todayYear, todayMonth, todayDay)
         }
-        dinnerImgV.setOnClickListener {
+        binding.dinner.setOnClickListener {
+            binding.bottomsheet.visibility = View.INVISIBLE
             navigateToNewDinner(todayYear, todayMonth, todayDay)
         }
-        wImgV.setOnClickListener {
+        binding.workoutimg.setOnClickListener {
+            binding.bottomsheet.visibility = View.INVISIBLE
             navigateToNewWorkout(todayYear, todayMonth, todayDay)
         }
 
 
-        calendarV.setOnDateChangeListener { _, year, month, dayOfMonth ->
+        binding.calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = "$year-$month-$dayOfMonth"
             Log.d("date", "$selectedDate")
             showView(year, month+1, dayOfMonth)
-            bfImgV.setOnClickListener {
+            binding.breakfast.setOnClickListener {
+                binding.bottomsheet.visibility = View.INVISIBLE
                 navigateToNewBreakFast(year, month+1, dayOfMonth) // Workout data 전체 보내기
             }
-            lunchImgV.setOnClickListener {
+            binding.lunch.setOnClickListener {
+                binding.bottomsheet.visibility = View.INVISIBLE
                 navigateToNewLunch(year, month+1, dayOfMonth) // Workout data 전체 보내기
             }
-            dinnerImgV.setOnClickListener {
+            binding.dinner.setOnClickListener {
+                binding.bottomsheet.visibility = View.INVISIBLE
                 navigateToNewDinner(year, month+1, dayOfMonth) // Workout data 전체 보내기
             }
-            wImgV.setOnClickListener {
+            binding.workoutimg.setOnClickListener {
+                binding.bottomsheet.visibility = View.INVISIBLE
                 navigateToNewWorkout(year, month+1, dayOfMonth) // Workout data 전체 보내기
             }
         }
     }
 
     private fun showView(year:Int, month:Int, day:Int){
-        val noWOimg = AppCompatResources.getDrawable(requireContext(), R.drawable.noworkout)
-        val noBFimg = AppCompatResources.getDrawable(requireContext(), R.drawable.nobreakfast)
-        val noLimg = AppCompatResources.getDrawable(requireContext(), R.drawable.nolunch)
-        val noDimg = AppCompatResources.getDrawable(requireContext(), R.drawable.nodinner)
+        val noImg = AppCompatResources.getDrawable(requireContext(), R.drawable.blankimg)
         CoroutineScope(Dispatchers.IO).launch{
             val dateWorkout = db?.workoutDao()?.getWorkoutByDate(year, month, day)
             var selectedWorkout: Workout? = dateWorkout?.firstOrNull()  //선택한 날짜의 workout 데이터
@@ -111,50 +101,50 @@ class Free : Fragment() {
                         Glide.with(requireContext())
                             .load(selectedWorkout.workoutImg)
                             .transition(DrawableTransitionOptions.withCrossFade())
-                            .into(wImgV)
-                        worktypeV.text = selectedWorkout.workoutType
-                        worktimeV.text = selectedWorkout.workoutTime
+                            .into(binding.workoutimg)
+                        binding.workoutType.text = selectedWorkout.workoutType
+                        binding.workoutTime.text = selectedWorkout.workoutTime
                     } else {
-                        wImgV.setImageDrawable(noWOimg)
-                        worktypeV.text = resources.getString(R.string.noexercise)
-                        worktimeV.text = resources.getString(R.string.noexercise)
+                        binding.workoutimg.setImageDrawable(noImg)
+                        binding.workoutType.text = resources.getString(R.string.noexercise)
+                        binding.workoutTime.text = resources.getString(R.string.noexercise)
                     }
                     // **changing 아침 식단 이미지
                     if (selectedWorkout.breakfastImg != null) {
                         Glide.with(requireContext())
                             .load(selectedWorkout.breakfastImg)
                             .transition(DrawableTransitionOptions.withCrossFade())
-                            .into(bfImgV)
+                            .into(binding.breakfast)
                     } else {
-                        bfImgV.setImageDrawable(noBFimg)
+                        binding.breakfast.setImageDrawable(noImg)
                     }
                     // **changing 점심 식단 이미지
                     if (selectedWorkout.lunchImg != null) {
                         Glide.with(requireContext())
                             .load(selectedWorkout.lunchImg)
                             .transition(DrawableTransitionOptions.withCrossFade())
-                            .into(lunchImgV)
+                            .into(binding.lunch)
                     } else {
-                        lunchImgV.setImageDrawable(noLimg)
+                        binding.lunch.setImageDrawable(noImg)
                     }
                     // **changing 저녁 식단 이미지
                     if (selectedWorkout.dinnerImg != null) {
                         Glide.with(requireContext())
                             .load(selectedWorkout.dinnerImg)
                             .transition(DrawableTransitionOptions.withCrossFade())
-                            .into(dinnerImgV)
+                            .into(binding.dinner)
                     } else {
-                        dinnerImgV.setImageDrawable(noDimg)
+                        binding.dinner.setImageDrawable(noImg)
                     }
                     // changing View finished
                 } else {    // 선택된 날짜에 해당하는 데이터가 없는 경우
                     // db에 해당 날짜의 데이터를 추가
-                    wImgV.setImageDrawable(noWOimg)
-                    bfImgV.setImageDrawable(noBFimg)
-                    lunchImgV.setImageDrawable(noLimg)
-                    dinnerImgV.setImageDrawable(noDimg)
-                    worktypeV.text = resources.getString(R.string.noexercise)
-                    worktimeV.text = resources.getString(R.string.noexercise)
+                    binding.workoutimg.setImageDrawable(noImg)
+                    binding.breakfast.setImageDrawable(noImg)
+                    binding.lunch.setImageDrawable(noImg)
+                    binding.dinner.setImageDrawable(noImg)
+                    binding.workoutType.text = resources.getString(R.string.noexercise)
+                    binding.workoutTime.text = resources.getString(R.string.noexercise)
                 }
             }
         }

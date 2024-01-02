@@ -1,19 +1,15 @@
 package com.example.madcamp_week01
 
-import android.content.Intent
+
 import android.net.Uri
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
