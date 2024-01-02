@@ -4,17 +4,22 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
+import android.widget.Filterable
 
-class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<AddressAdapter.Holder>() {
+class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<AddressAdapter.Holder>(){
 
     lateinit var mContext: Context
+    private var filteredList: List<Contacts>? = contactsList
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_address_item, parent, false)
@@ -35,6 +40,7 @@ class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<A
         private val imageView: ImageView = itemView.findViewById(R.id.imageView)
         private val nameTextView: TextView = itemView.findViewById(R.id.nameItem)
         private val numTextView: TextView = itemView.findViewById(R.id.numItem)
+
         fun setItem(contact:Contacts, position: Int){
             index = position
 
@@ -59,6 +65,9 @@ class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<A
                 fragmentTransaction.commit()
             }
         }
+
     }
+
+
 }
 

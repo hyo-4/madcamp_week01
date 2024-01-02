@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.appcompat.widget.SearchView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,9 @@ class MyAddress : Fragment() {
     private var adapter: AddressAdapter? = null
     lateinit var recyclerV: RecyclerView
     lateinit var noAddressDataTextView: TextView
+    lateinit var SearchContact : SearchView
     var db: AppDatabase? = null
+    var contactsList = mutableListOf<Contacts>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +35,9 @@ class MyAddress : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerV = view.findViewById(R.id.recyclerV)
         noAddressDataTextView = view.findViewById(R.id.noAddressData)
+        SearchContact = view.findViewById(R.id.searchAddress)
+
+
         db = AppDatabase.getInstance(requireContext())
         CoroutineScope(Dispatchers.IO).launch{
             val savedContacts = db?.contactsDao()?.getAll() ?: emptyList()
@@ -58,6 +64,7 @@ class MyAddress : Fragment() {
         plusButton.setOnClickListener {
             navigateToAddContactFragment()
         }
+
     }
 
     private fun navigateToAddContactFragment() {
