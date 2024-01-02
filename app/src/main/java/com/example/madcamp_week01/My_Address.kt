@@ -1,11 +1,13 @@
 package com.example.madcamp_week01
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageButton
 import androidx.appcompat.widget.SearchView
 import android.widget.TextView
@@ -22,6 +24,7 @@ class MyAddress : Fragment() {
     lateinit var SearchContact : SearchView
     var db: AppDatabase? = null
     var contactsList = mutableListOf<Contacts>()
+    var filteredList = mutableListOf<Contacts>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +47,7 @@ class MyAddress : Fragment() {
             Log.d("savedContacts", "contacts: $savedContacts")
             var contactsList = mutableListOf<Contacts>()
             contactsList.addAll(savedContacts)
+            filteredList.addAll(savedContacts)
 
             if (contactsList.isEmpty()) {
                 noAddressDataTextView.visibility = View.VISIBLE
@@ -56,15 +60,89 @@ class MyAddress : Fragment() {
                     adapter = AddressAdapter(contactsList)
                     recyclerV.adapter = adapter
                     recyclerV.layoutManager = LinearLayoutManager(context)
+
             }
         }
 
+        SearchContact.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    var newoutputList = mutableListOf<Contacts>()
+
+                    for (contact in filteredList) {
+                        if (contact.name.contains(query, true) && !newoutputList.contains(contact)) {
+                            newoutputList.add(contact)
+                        }
+                    }
+
+                    Log.d("submit", query)
+                    Log.d("filter", filteredList.toString())
+                    Log.d("new", newoutputList.toString())
+
+                    noAddressDataTextView.visibility = View.INVISIBLE
+                    recyclerV.visibility = View.VISIBLE
+
+                    adapter = AddressAdapter(newoutputList)
+                    recyclerV.adapter = adapter
+                    recyclerV.layoutManager = LinearLayoutManager(context)
+
+                    val inputMethodManager =
+                        context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+
+
+                }
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("change",newText.toString())
+                newText?.let {
+                    var newoutputList = mutableListOf<Contacts>()
+
+                    for (contact in filteredList) {
+                        if (contact.name.contains(newText, true) && !newoutputList.contains(contact)) {
+                            newoutputList.add(contact)
+                        }
+                    }
+
+                    Log.d("submit", newText)
+                    Log.d("filter", filteredList.toString())
+                    Log.d("new", newoutputList.toString())
+
+                    noAddressDataTextView.visibility = View.INVISIBLE
+                    recyclerV.visibility = View.VISIBLE
+
+                    adapter = AddressAdapter(newoutputList)
+                    recyclerV.adapter = adapter
+                    recyclerV.layoutManager = LinearLayoutManager(context)
+
+
+                }
+                return true
+            }
+        })
 
         val plusButton: ImageButton = view.findViewById(R.id.plusbutton)
         plusButton.setOnClickListener {
             navigateToAddContactFragment()
         }
 
+    }
+
+    private fun updateRecyclerView(filteredContacts: List<Contacts>) {
+        if (filteredContacts.isEmpty()) {
+            noAddressDataTextView.visibility = View.VISIBLE
+            recyclerV.visibility = View.INVISIBLE
+        } else {
+            noAddressDataTextView.visibility = View.INVISIBLE
+            recyclerV.visibility = View.VISIBLE
+
+            adapter = AddressAdapter(filteredContacts)
+            recyclerV.adapter = adapter
+            recyclerV.layoutManager = LinearLayoutManager(context)
+        }
     }
 
     private fun navigateToAddContactFragment() {

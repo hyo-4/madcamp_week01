@@ -20,6 +20,7 @@ class AddressAdapter(var contactsList: List<Contacts>?) : RecyclerView.Adapter<A
     lateinit var mContext: Context
     private var filteredList: List<Contacts>? = contactsList
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_address_item, parent, false)
