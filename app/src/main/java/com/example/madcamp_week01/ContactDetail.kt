@@ -16,6 +16,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.example.madcamp_week01.databinding.ContactdetailBinding
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
 
 class ContactDetail(private val contact: Contacts) : Fragment() {
     private lateinit var binding: ContactdetailBinding
@@ -62,7 +66,41 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
         binding.editbutton.setOnClickListener {
             navigateEdit(contact)
         }
+        binding.callbutton.setOnClickListener {
+            val phoneNumber = contact.tel
+            openDialer(phoneNumber)
+        }
+        binding.messagebutton.setOnClickListener {
+            val phoneNumber = contact.tel
+            openMessagingApp(phoneNumber)
+        }
+
     }
+
+    private fun openDialer(phoneNumber: String) {
+        val dialIntent = Intent(Intent.ACTION_DIAL)
+        dialIntent.data = Uri.parse("tel:$phoneNumber")
+
+        try {
+            startActivity(dialIntent)
+        } catch (e: ActivityNotFoundException) {
+            // Handle exception, e.g., show a toast or log an error
+            Toast.makeText(requireContext(), "Dialer not found", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun openMessagingApp(phoneNumber: String) {
+        val smsUri = Uri.parse("smsto:$phoneNumber")
+        val smsIntent = Intent(Intent.ACTION_SENDTO, smsUri)
+
+        try {
+            startActivity(smsIntent)
+        } catch (e: ActivityNotFoundException) {
+            // Handle exception, e.g., show a toast or log an error
+            Toast.makeText(requireContext(), "Messaging app not found", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun showDeleteConfirmDialog() {
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle("Delete")
