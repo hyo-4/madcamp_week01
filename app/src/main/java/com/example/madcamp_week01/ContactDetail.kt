@@ -78,6 +78,10 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
             val phoneNumber = contact.tel
             openMessagingApp(phoneNumber)
         }
+        binding.facetimebutton.setOnClickListener {
+            val phoneNumber = contact.tel
+            openVideoDialer(phoneNumber)
+        }
 
     }
 
@@ -90,6 +94,18 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
         } catch (e: ActivityNotFoundException) {
             // Handle exception, e.g., show a toast or log an error
             Toast.makeText(requireContext(), "Dialer not found", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun openVideoDialer(phoneNumber: String) {
+        val videoDialIntent = Intent(Intent.ACTION_VIEW)
+        videoDialIntent.data = Uri.parse("video:tel:$phoneNumber")
+
+        try {
+            startActivity(videoDialIntent)
+        } catch (e: ActivityNotFoundException) {
+            // Handle exception, e.g., show a toast or log an error
+            Toast.makeText(requireContext(), "Video dialer not found", Toast.LENGTH_SHORT).show()
         }
     }
 
