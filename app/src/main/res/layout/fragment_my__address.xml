@@ -8,6 +8,7 @@
     android:background="#FFFFFF"
     tools:context=".MyAddress">
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -19,11 +20,20 @@
         android:gravity="center"
         android:textSize="24dp" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="#FFFFFF"
+        app:iconifiedByDefault="false"
+        app:queryHint="Search Address" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:background="#FFFFFF"
         app:layoutManager="LinearLayoutManager" />
 
