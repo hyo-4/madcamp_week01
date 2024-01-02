@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
 import android.Manifest;
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Thread.sleep(2000)
+        installSplashScreen()
         setContentView(R.layout.activity_main)
         val tabLayout: TabLayout = findViewById(R.id.tab_layout)
         tab1 = MyAddress()
