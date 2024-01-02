@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Thread.sleep(2000)
         installSplashScreen()
+
         setContentView(R.layout.activity_main)
         val tabLayout: TabLayout = findViewById(R.id.tab_layout)
         tab1 = MyAddress()
