@@ -56,24 +56,41 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             navigateBack()
         }
+        binding.backbutton.setOnClickListener{
+            navigateBack()
+        }
+        binding.editbutton.setOnClickListener {
+            navigateEdit(contact)
+        }
     }
     private fun showDeleteConfirmDialog() {
         val dialog = AlertDialog.Builder(requireContext())
-            .setTitle("삭제 확인")
-            .setMessage("이 연락처를 삭제하시겠습니까?")
-            .setPositiveButton("확인") {_, _ ->
+            .setTitle("Delete")
+            .setMessage("\nAre you sure to delete this address?")
+            .setPositiveButton("confirm") {_, _ ->
                 CoroutineScope(Dispatchers.IO).launch {
                     deleteContact(contact)
                     navigateBack()
                 }
             }
-            .setNegativeButton("취소", null)
+            .setNegativeButton("cancel", null)
             .create()
 
         dialog.show()
     }
     private fun deleteContact(contact: Contacts) {
         db?.contactsDao()?.delete(contact)
+    }
+
+    private fun navigateEdit(contact: Contacts) {
+        val editfragment = EditProfile(contact)
+        binding.section.visibility = View.INVISIBLE
+        binding.namedetail.visibility = View.INVISIBLE
+        binding.profiletag.visibility = View.INVISIBLE
+        binding.delbutton.visibility = View.INVISIBLE
+        val fragmentTransaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.profilepage, editfragment)
+        fragmentTransaction.commit()
     }
     private fun navigateBack() {
         val myAddressFragment = MyAddress()
@@ -83,8 +100,7 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
         binding.delbutton.visibility = View.INVISIBLE
 
         val fragmentTransaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.profilepage, myAddressFragment)
-        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.replace(R.id.profilepage, myAddressFragment)
         fragmentTransaction.commit()
     }
 }

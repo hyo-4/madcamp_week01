@@ -37,7 +37,7 @@ class AddContactFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = AddcontactBinding.inflate(inflater, container, false)
         db = AppDatabase.getInstance(requireContext())
-
+        binding.addphotobutton.visibility = View.VISIBLE
 
         getPhoto =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -122,10 +122,9 @@ class AddContactFragment : Fragment() {
     private fun navigateToMyAddressFragment() {
         // Navigate to the "my_address" fragment
         val myAddressFragment = MyAddress()
-
+        binding.addphotobutton.visibility = View.INVISIBLE
         val fragmentTransaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.addcontactpage, myAddressFragment)
-        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.replace(R.id.addcontactpage, myAddressFragment)
         fragmentTransaction.commit()
     }
 

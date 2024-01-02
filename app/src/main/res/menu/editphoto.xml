@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/galleryoption"
+        android:title="From Gallery" />
+    <item
+        android:id="@+id/defaultoption"
+        android:title="Default Image" />
+</menu>

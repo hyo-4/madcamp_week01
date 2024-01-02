@@ -146,5 +146,30 @@
         android:drawableLeft="@drawable/del"
         android:drawablePadding="-65dp"        />
 
+    <ImageButton
+        android:id="@+id/backbutton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/goback"
+        android:scaleType="centerCrop"
+        android:elevation="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/editbutton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:elevation="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
