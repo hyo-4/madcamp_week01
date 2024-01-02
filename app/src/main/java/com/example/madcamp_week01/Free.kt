@@ -153,6 +153,8 @@ class Free : Fragment() {
                     bfImgV.setImageDrawable(noBFimg)
                     lunchImgV.setImageDrawable(noLimg)
                     dinnerImgV.setImageDrawable(noDimg)
+                    worktypeV.text = resources.getString(R.string.noexercise)
+                    worktimeV.text = resources.getString(R.string.noexercise)
                 }
             }
         }
