@@ -61,7 +61,7 @@
         android:id="@+id/spinner"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/spinnerdesign"
         android:entries="@array/contactoption"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,12 +88,11 @@
         android:id="@+id/completebutton"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="95dp"
         android:background="@android:color/transparent"
+        android:layout_marginTop="0dp"
         android:scaleType="fitCenter"
         android:src="@drawable/complete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editnumber" />
 

@@ -19,6 +19,7 @@ import com.example.madcamp_week01.databinding.ContactdetailBinding
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 
 class ContactDetail(private val contact: Contacts) : Fragment() {
@@ -31,10 +32,13 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
     ): View? {
         binding = ContactdetailBinding.inflate(inflater, container, false)
         db = AppDatabase.getInstance(requireContext())
+
+
         if(contact.image != null){
             Glide.with(requireContext())
                 .load(contact.image)
                 .into(binding.profileimg)
+            Log.d("profile", "${contact.image}")
         }else{
             val noimage = AppCompatResources.getDrawable(requireContext(), R.drawable.blankimage)
             binding.profileimg.setImageDrawable(noimage)
@@ -141,4 +145,5 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
         fragmentTransaction.replace(R.id.profilepage, myAddressFragment)
         fragmentTransaction.commit()
     }
+
 }
