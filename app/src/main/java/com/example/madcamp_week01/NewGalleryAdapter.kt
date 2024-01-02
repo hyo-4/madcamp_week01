@@ -41,7 +41,7 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
                 detailTextView.visibility= View.VISIBLE
                 detailTextView.text = "${workout.workoutTime} 동안 ${workout.workoutType} 했어요"
                 workoutImageView.setOnClickListener {
-                   showDetailFragment(workout.workoutImg!!)
+                   showDetailFragment(workout.workoutImg!!,workout.year,workout.month,workout.date,"workout")
                 }
 
             } ?: run {
@@ -56,7 +56,7 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
                 breakfastImageView.visibility = View.VISIBLE
                 breakfastView.visibility = View.VISIBLE
                 breakfastImageView.setOnClickListener {
-                    showDetailFragment(workout.breakfastImg!!)
+                    showDetailFragment(workout.breakfastImg!!,workout.year,workout.month,workout.date,"breakfast")
                 }
             } ?: run {
                 breakfastImageView.visibility = View.GONE
@@ -69,7 +69,7 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
                 lunchImageView.visibility = View.VISIBLE
                 lunchView.visibility= View.VISIBLE
                 lunchImageView.setOnClickListener {
-                    showDetailFragment(workout.lunchImg!!)
+                    showDetailFragment(workout.lunchImg!!,workout.year,workout.month,workout.date,"lunch")
                 }
             } ?: run {
                 lunchImageView.visibility = View.GONE
@@ -82,7 +82,7 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
                 dinnerImageView.visibility = View.VISIBLE
                 dinnerView.visibility = View.VISIBLE
                 dinnerImageView.setOnClickListener {
-                    showDetailFragment(workout.dinnerImg!!)
+                    showDetailFragment(workout.dinnerImg!!,workout.year,workout.month,workout.date,"dinner")
                 }
             } ?: run {
                 dinnerImageView.visibility = View.GONE
@@ -93,8 +93,8 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
 
         }
 
-        private fun showDetailFragment(image:Uri) {
-            val detailFragment = GalleryDetail(image)
+        private fun showDetailFragment(image:Uri, year:Int, month:Int, date:Int, type: String) {
+            val detailFragment = GalleryDetail(image,year,month,date,type)
 
             val fragmentTransaction = (itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragmentNewGallery, detailFragment)
