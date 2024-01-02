@@ -6,4 +6,11 @@
         <item>점심</item>
         <item>저녁</item>
     </string-array>
+
+    <string-array name="contactoption">
+        <item>(Select a Tag)</item>
+        <item>Health Trainer</item>
+        <item>Workout Mate</item>
+        <item>Friend</item>
+    </string-array>
 </resources>

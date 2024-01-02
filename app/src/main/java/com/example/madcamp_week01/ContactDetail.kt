@@ -1,6 +1,9 @@
 package com.example.madcamp_week01
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +41,7 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
         binding.delbutton.visibility = View.VISIBLE
 
         binding.namedetail.text = contact.name
+        binding.profiletag.text = contact.tag
         binding.phonenum.text = contact.tel
         return binding.root
     }
@@ -45,14 +49,28 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.delbutton.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch{
-                deleteContact(contact)
-                navigateBack()
+            Handler(Looper.getMainLooper()).post {
+                showDeleteConfirmDialog()
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             navigateBack()
         }
+    }
+    private fun showDeleteConfirmDialog() {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("삭제 확인")
+            .setMessage("이 연락처를 삭제하시겠습니까?")
+            .setPositiveButton("확인") {_, _ ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    deleteContact(contact)
+                    navigateBack()
+                }
+            }
+            .setNegativeButton("취소", null)
+            .create()
+
+        dialog.show()
     }
     private fun deleteContact(contact: Contacts) {
         db?.contactsDao()?.delete(contact)

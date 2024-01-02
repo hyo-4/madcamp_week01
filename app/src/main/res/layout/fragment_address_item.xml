@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
+    android:layout_marginTop="2.5dp"
+    android:layout_marginBottom="2.5dp"
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
     android:background="@drawable/selecteffect"
     android:clipToOutline="true"
-    android:elevation="5dp">
+    android:elevation="3dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
