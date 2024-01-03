@@ -21,6 +21,11 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+import com.bumptech.glide.request.RequestOptions
 
 class ContactDetail(private val contact: Contacts) : Fragment() {
     private lateinit var binding: ContactdetailBinding
@@ -32,16 +37,27 @@ class ContactDetail(private val contact: Contacts) : Fragment() {
     ): View? {
         binding = ContactdetailBinding.inflate(inflater, container, false)
         db = AppDatabase.getInstance(requireContext())
+        val transformation = MultiTransformation(
+            CenterCrop(),
+            RoundedCornersTransformation(120, 0, RoundedCornersTransformation.CornerType.BOTTOM_LEFT),
+            RoundedCornersTransformation(120, 0, RoundedCornersTransformation.CornerType.BOTTOM_RIGHT)
+        )
 
 
         if(contact.image != null){
+
             Glide.with(requireContext())
                 .load(contact.image)
+                .apply(RequestOptions.bitmapTransform(transformation))
                 .into(binding.profileimg)
+            binding.profileimg.clipToOutline = true
+
             Log.d("profile", "${contact.image}")
         }else{
-            val noimage = AppCompatResources.getDrawable(requireContext(), R.drawable.blankimage)
-            binding.profileimg.setImageDrawable(noimage)
+            Glide.with(requireContext())
+                .load(R.drawable.blankimage)
+                .apply(RequestOptions.bitmapTransform(transformation))
+                .into(binding.profileimg)
         }
         binding.section.visibility = View.VISIBLE
         binding.namedetail.visibility = View.VISIBLE

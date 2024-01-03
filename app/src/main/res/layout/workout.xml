@@ -9,50 +9,76 @@
     android:background="#FFFFFF"
     android:clickable="true"
     tools:context=".Free">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#FFFFFF"
-            android:text="@string/schedule"
-            android:fontFamily="@font/myfont"
-            android:textColor="#000000"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="24dp" />
 
-        <CalendarView
-            android:id="@+id/calendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp" />
-    </LinearLayout>
+    <CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/bottomsheet"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:padding="10dp"
-        android:elevation="10dp"
         app:behavior_hideable="false"
-        app:behavior_peekHeight="303.5dp"
+        app:behavior_peekHeight="254dp"
         app:cardCornerRadius="36dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" >
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <View
+            android:id="@+id/bar"
+            android:layout_width="80dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dragbar"
+            android:layout_gravity="center_horizontal"
+            android:elevation="3dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginTop="40sp">
+
+            <ImageView
+                android:id="@+id/calendarlogo"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/calendar"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/todaydate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="@font/myfont"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:text="0000/00/00" />
+
+            <View
+                android:id="@+id/empty"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"/>
+        </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/diet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25sp"
-            android:layout_marginTop="50sp"
+            android:layout_marginTop="94sp"
             android:textSize="23sp"
             android:fontFamily="@font/myfont"
             android:text="@string/todayDiet" />
@@ -60,16 +86,16 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100sp"
-            android:layout_marginStart="15sp"
+            android:layout_marginTop="134sp"
+            android:layout_marginStart="20sp"
             android:layout_gravity="left"
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
             <ImageButton
                 android:id="@+id/breakfast"
-                android:layout_width="120sp"
-                android:layout_height="120sp"
+                android:layout_width="90sp"
+                android:layout_height="90sp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/workoutimage"
                 android:clipToOutline="true"
@@ -88,15 +114,15 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100sp"
+            android:layout_marginTop="134sp"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal">
 
             <ImageButton
                 android:id="@+id/lunch"
-                android:layout_width="120sp"
-                android:layout_height="120sp"
+                android:layout_width="90sp"
+                android:layout_height="90sp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/workoutimage"
                 android:clipToOutline="true"
@@ -114,16 +140,16 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100sp"
-            android:layout_marginEnd="15sp"
+            android:layout_marginTop="134sp"
+            android:layout_marginEnd="20sp"
             android:orientation="vertical"
             android:layout_gravity="right"
             android:gravity="center_horizontal">
 
             <ImageButton
                 android:id="@+id/dinner"
-                android:layout_width="120sp"
-                android:layout_height="120sp"
+                android:layout_width="90sp"
+                android:layout_height="90sp"
                 android:layout_gravity="right"
                 android:scaleType="centerCrop"
                 android:background="@drawable/workoutimage"
@@ -145,7 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25sp"
-            android:layout_marginTop="300sp"
+            android:layout_marginTop="284sp"
             android:textSize="23sp"
             android:text="@string/todayWorkout" />
 
@@ -154,7 +180,8 @@
             android:layout_width="150dp"
             android:layout_height="200dp"
             android:layout_marginStart="15sp"
-            android:layout_marginTop="350sp"
+            android:layout_marginTop="334sp"
+            android:layout_marginBottom="100sp"
             android:background="@drawable/workoutimage"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
@@ -164,7 +191,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="190sp"
-            android:layout_marginTop="400sp"
+            android:layout_marginTop="384sp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -179,7 +206,7 @@
                 android:id="@+id/workoutType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="20dp"
                 android:textSize="14sp"
                 android:text="@string/noexercise" />
 
@@ -189,7 +216,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="190sp"
-            android:layout_marginTop="460sp"
+            android:layout_marginTop="444sp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -204,7 +231,7 @@
                 android:id="@+id/workoutTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="20dp"
                 android:textSize="14sp"
                 android:text="@string/noexercise" />
 
