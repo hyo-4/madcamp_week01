@@ -46,8 +46,11 @@ class MyAddress : Fragment() {
             val savedContacts = db?.contactsDao()?.getAll() ?: emptyList()
             Log.d("savedContacts", "contacts: $savedContacts")
             var contactsList = mutableListOf<Contacts>()
+            contactsList.clear()
             contactsList.addAll(savedContacts)
+            filteredList.clear()
             filteredList.addAll(savedContacts)
+
             SearchContact.isFocusable = false
             SearchContact.isFocusableInTouchMode = false
 
@@ -91,6 +94,7 @@ class MyAddress : Fragment() {
                     val inputMethodManager =
                         context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+                    newoutputList.clear()
 
 
                 }
