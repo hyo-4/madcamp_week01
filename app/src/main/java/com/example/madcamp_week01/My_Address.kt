@@ -71,18 +71,38 @@ class MyAddress : Fragment() {
 
         SearchContact.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
+//                query?.let {
+//                    var newoutputList = mutableListOf<Contacts>()
+//
+//                    for (contact in filteredList) {
+//                        if (contact.name.contains(query, true) && !newoutputList.contains(contact)) {
+//                            newoutputList.add(contact)
+//                        }
+//                    }
+//
+//                    Log.d("submit", query)
+//                    Log.d("filter", filteredList.toString())
+//                    Log.d("new", newoutputList.toString())
+//
+//                    noAddressDataTextView.visibility = View.INVISIBLE
+//                    recyclerV.visibility = View.VISIBLE
+//
+//                    adapter = AddressAdapter(newoutputList)
+//                    recyclerV.adapter = adapter
+//                    recyclerV.layoutManager = LinearLayoutManager(context)
+//
+//                    val inputMethodManager =
+//                        context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//                    inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+//                    newoutputList.clear()
+//
+//
+//                }
+
                 query?.let {
-                    var newoutputList = mutableListOf<Contacts>()
-
-                    for (contact in filteredList) {
-                        if (contact.name.contains(query, true) && !newoutputList.contains(contact)) {
-                            newoutputList.add(contact)
-                        }
-                    }
-
-                    Log.d("submit", query)
-                    Log.d("filter", filteredList.toString())
-                    Log.d("new", newoutputList.toString())
+                    val newoutputList = filteredList.filter { contact ->
+                        contact.name.contains(query, true)
+                    }.toMutableList()
 
                     noAddressDataTextView.visibility = View.INVISIBLE
                     recyclerV.visibility = View.VISIBLE
@@ -91,11 +111,8 @@ class MyAddress : Fragment() {
                     recyclerV.adapter = adapter
                     recyclerV.layoutManager = LinearLayoutManager(context)
 
-                    val inputMethodManager =
-                        context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
-                    newoutputList.clear()
-
+                    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(view?.windowToken, 0)
 
                 }
 
