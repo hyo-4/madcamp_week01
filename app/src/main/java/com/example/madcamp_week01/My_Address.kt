@@ -113,7 +113,7 @@ class MyAddress : Fragment() {
                     recyclerV.adapter = adapter
                     recyclerV.layoutManager = LinearLayoutManager(context)
 
-                    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(view?.windowToken, 0)
 
                 }
@@ -158,7 +158,12 @@ class MyAddress : Fragment() {
 
             adapter = AddressAdapter(filteredContacts)
             recyclerV.adapter = adapter
-            recyclerV.layoutManager = LinearLayoutManager(context)
+            //recyclerV.layoutManager = LinearLayoutManager(context)
+            if (context != null) {
+                recyclerV.setLayoutManager(LinearLayoutManager(context));
+            } else {
+                Log.e("YourTag", "Context is null. Unable to set the LinearLayoutManager.");
+            }
         }
     }
 
@@ -168,7 +173,7 @@ class MyAddress : Fragment() {
 
         // Replace the current fragment with the AddContact fragment
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.fragmentContainer, addContactFragment)
+        fragmentTransaction.replace(R.id.fragmentContainer, addContactFragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
