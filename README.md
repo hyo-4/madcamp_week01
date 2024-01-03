@@ -41,7 +41,7 @@
 
 |앱 실행 화면|연락처 메인페이지|연락처 등록 페이지|
 |------|---|---|
-|<img src="https://github.com/hyo-4/madcamp_week01/assets/70904075/15f604a4-df70-4b55-9305-f16ada19e3f3" width="300px">|<img src="(이미지링크)" width="300px">|<img src="(이미지링크)" width="300px">|
+|<img src="https://github.com/hyo-4/madcamp_week01/assets/70904075/15f604a4-df70-4b55-9305-f16ada19e3f3" width="300px">|<img src="(이미지링크)" width="300px">|<img src="https://github.com/hyo-4/madcamp_week01/assets/70904075/c4eb1302-bafe-4f63-a5b0-f297a5ba550a" width="300px">|
 |연락처 검색 | 갤러리 메인페이지|갤러리 상세페이지|
 |<img src="(이미지링크)" width="300px">|<img src="https://github.com/hyo-4/madcamp_week01/assets/70904075/317f8925-c215-439a-8918-c13280d65976" width="300px">|<img src="https://github.com/hyo-4/madcamp_week01/assets/70904075/a77c5f6e-b741-4b3b-9ea6-cedb01f6c9ad" width="300px">|
 |갤러리 사진 수정페이지| 캘린더 메인페이지 | 캘린더 bottomup |
