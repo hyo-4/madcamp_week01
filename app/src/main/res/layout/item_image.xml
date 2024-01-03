@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="20dp"
         app:cardElevation="5dp"
         >
 
@@ -26,24 +26,46 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/dateView"
-                android:layout_width="400dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="60dp"
-                android:fontFamily="@font/myfont"
-                android:text="빈 텍스트"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/calendarlogo"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/calendar"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/dateView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/medium"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:text="0000/00/00" />
+
+                <View
+                    android:id="@+id/empty"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:scaleType="centerCrop"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/breakfastText"
                 android:layout_width="400dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/myfont"
-                android:text="☀️ 아침 ☀️"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/bold"
+                android:text="Breakfast"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -62,8 +84,9 @@
                 android:layout_width="400dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="60dp"
-                android:layout_marginTop="10dp"
-                android:text="🍚 점심 🍚"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/bold"
+                android:text="Lunch"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -82,10 +105,10 @@
                 android:id="@+id/dinnerText"
                 android:layout_width="400dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/myfont"
-                android:text="🌙 저녁 🌙"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/bold"
+                android:text="Dinner"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -104,10 +127,10 @@
                 android:id="@+id/WorkoutText"
                 android:layout_width="400dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/myfont"
-                android:text="🏃 운동 🏃"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/bold"
+                android:text="Workout"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -126,9 +149,10 @@
                 android:id="@+id/WorkoutDetailText"
                 android:layout_width="400dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="40dp"
-                android:fontFamily="@font/myfont4"
-                android:gravity="center"
+                android:layout_marginEnd="60dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/medium"
+                android:gravity="end"
                 android:text="운동 세부 내역"
                 android:textSize="18sp"
                 android:textStyle="bold" />

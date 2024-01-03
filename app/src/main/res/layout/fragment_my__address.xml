@@ -14,7 +14,7 @@
         android:layout_height="60dp"
         android:background="#FFFFFF"
         android:text="@string/address"
-        android:fontFamily="@font/myfont"
+        android:fontFamily="@font/bold"
         android:textColor="#000000"
         android:textAlignment="center"
         android:gravity="center"
@@ -42,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="No Address Data"
+        android:fontFamily="@font/medium"
         android:textSize="30sp"
         android:layout_gravity="center" />
 

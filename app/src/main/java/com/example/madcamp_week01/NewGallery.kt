@@ -128,13 +128,4 @@ class NewGallery : Fragment() {
 
     }
 
-    private fun navigateToAddContactFragment() {
-        // Create an instance of the AddContact fragment
-        val inputDataFragment = InputDataFragment()
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentNewGallery, inputDataFragment)
-            .addToBackStack(null)
-            .commit()
-    }
-
 }
