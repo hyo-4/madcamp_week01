@@ -20,12 +20,13 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class ContactDetail(private val contact: Contacts) : Fragment() {
     private lateinit var binding: ContactdetailBinding

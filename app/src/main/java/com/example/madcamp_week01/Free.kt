@@ -9,6 +9,8 @@ import android.widget.CalendarView
 import android.widget.ImageButton
 import android.widget.TextView
 import android.util.Log
+import android.widget.LinearLayout
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -33,6 +35,7 @@ import java.util.Locale
 class Free : Fragment() {
     private lateinit var binding: WorkoutBinding
     var db: AppDatabase? = null
+    private var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +43,9 @@ class Free : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = WorkoutBinding.inflate(inflater, container, false)
-        binding.bottomsheet.visibility = View.VISIBLE
-
-        val params = binding.bottomsheet.layoutParams as CoordinatorLayout.LayoutParams
-        val behavior = params.behavior as BottomSheetBehavior
-        behavior.peekHeight = resources.getDimensionPixelSize(R.dimen.bottom_sheet_peek_height)
-        behavior.maxHeight = resources.getDimensionPixelSize(R.dimen.bottom_sheet_max_height)
-
+        val bottomSheetLayout: LinearLayout = binding.layout.bottomSheetLayout
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
+        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,48 +60,54 @@ class Free : Fragment() {
 
         val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
         val today = dateFormat.format(todayCalendar.time)
-        binding.todaydate.text = today
+        binding.layout.todaydate.text = today
 
-        binding.breakfast.setOnClickListener {
-            binding.bottomsheet.visibility = View.INVISIBLE
+        binding.layout.breakfast.setOnClickListener {
+            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
             navigateToNewBreakFast(todayYear, todayMonth, todayDay)
         }
-        binding.lunch.setOnClickListener {
-            binding.bottomsheet.visibility = View.INVISIBLE
+        binding.layout.lunch.setOnClickListener {
+            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
             navigateToNewLunch(todayYear, todayMonth, todayDay)
         }
-        binding.dinner.setOnClickListener {
-            binding.bottomsheet.visibility = View.INVISIBLE
+        binding.layout.dinner.setOnClickListener {
+            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
             navigateToNewDinner(todayYear, todayMonth, todayDay)
         }
-        binding.workoutimg.setOnClickListener {
-            binding.bottomsheet.visibility = View.INVISIBLE
+        binding.layout.workoutimg.setOnClickListener {
+            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
             navigateToNewWorkout(todayYear, todayMonth, todayDay)
         }
 
 
         binding.calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
             showView(year, month+1, dayOfMonth)
-            binding.breakfast.setOnClickListener {
-                binding.bottomsheet.visibility = View.INVISIBLE
+            binding.layout.breakfast.setOnClickListener {
+                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
                 navigateToNewBreakFast(year, month+1, dayOfMonth) // Workout data 전체 보내기
             }
-            binding.lunch.setOnClickListener {
-                binding.bottomsheet.visibility = View.INVISIBLE
+            binding.layout.lunch.setOnClickListener {
+                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
                 navigateToNewLunch(year, month+1, dayOfMonth) // Workout data 전체 보내기
             }
-            binding.dinner.setOnClickListener {
-                binding.bottomsheet.visibility = View.INVISIBLE
+            binding.layout.dinner.setOnClickListener {
+                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
                 navigateToNewDinner(year, month+1, dayOfMonth) // Workout data 전체 보내기
             }
-            binding.workoutimg.setOnClickListener {
-                binding.bottomsheet.visibility = View.INVISIBLE
+            binding.layout.workoutimg.setOnClickListener {
+                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
                 navigateToNewWorkout(year, month+1, dayOfMonth) // Workout data 전체 보내기
             }
 
             val monthFormatted = String.format(Locale.getDefault(), "%02d", month+1)
             val dayFormatted = String.format(Locale.getDefault(), "%02d", dayOfMonth)
-            binding.todaydate.text = "$year/$monthFormatted/$dayFormatted"
+            binding.layout.todaydate.text = "$year/$monthFormatted/$dayFormatted"
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (bottomSheetBehavior?.state == BottomSheetBehavior.STATE_EXPANDED){
+                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
         }
     }
 
@@ -124,52 +129,52 @@ class Free : Fragment() {
                         Glide.with(requireContext())
                             .load(selectedWorkout.workoutImg)
                             .apply(RequestOptions.bitmapTransform(transformation))
-                            .into(binding.workoutimg)
-                        binding.workoutType.text = selectedWorkout.workoutType
-                        binding.workoutTime.text = selectedWorkout.workoutTime
+                            .into(binding.layout.workoutimg)
+                        binding.layout.workoutType.text = selectedWorkout.workoutType
+                        binding.layout.workoutTime.text = selectedWorkout.workoutTime
                     } else {
                         Glide.with(requireContext())
                             .load(R.drawable.blankimg)
                             .apply(RequestOptions.bitmapTransform(transformation))
-                            .into(binding.workoutimg)
-                        binding.workoutType.text = resources.getString(R.string.noexercise)
-                        binding.workoutTime.text = resources.getString(R.string.noexercise)
+                            .into(binding.layout.workoutimg)
+                        binding.layout.workoutType.text = resources.getString(R.string.noexercise)
+                        binding.layout.workoutTime.text = resources.getString(R.string.noexercise)
                     }
                     // **changing 아침 식단 이미지
                     if (selectedWorkout.breakfastImg != null) {
                         Glide.with(requireContext())
                             .load(selectedWorkout.breakfastImg)
                             .apply(RequestOptions.bitmapTransform(transformation))
-                            .into(binding.breakfast)
+                            .into(binding.layout.breakfast)
                     } else {
                         Glide.with(requireContext())
                             .load(R.drawable.blankimg)
                             .apply(RequestOptions.bitmapTransform(transformation))
-                            .into(binding.breakfast)
+                            .into(binding.layout.breakfast)
                     }
                     // **changing 점심 식단 이미지
                     if (selectedWorkout.lunchImg != null) {
                         Glide.with(requireContext())
                             .load(selectedWorkout.lunchImg)
                             .apply(RequestOptions.bitmapTransform(transformation))
-                            .into(binding.lunch)
+                            .into(binding.layout.lunch)
                     } else {
                         Glide.with(requireContext())
                             .load(R.drawable.blankimg)
                             .apply(RequestOptions.bitmapTransform(transformation))
-                            .into(binding.lunch)
+                            .into(binding.layout.lunch)
                     }
                     // **changing 저녁 식단 이미지
                     if (selectedWorkout.dinnerImg != null) {
                         Glide.with(requireContext())
                             .load(selectedWorkout.dinnerImg)
                             .apply(RequestOptions.bitmapTransform(transformation))
-                            .into(binding.dinner)
+                            .into(binding.layout.dinner)
                     } else {
                         Glide.with(requireContext())
                             .load(R.drawable.blankimg)
                             .apply(RequestOptions.bitmapTransform(transformation))
-                            .into(binding.dinner)
+                            .into(binding.layout.dinner)
                     }
                     // changing View finished
                 } else {    // 선택된 날짜에 해당하는 데이터가 없는 경우
@@ -177,21 +182,21 @@ class Free : Fragment() {
                     Glide.with(requireContext())
                         .load(R.drawable.blankimg)
                         .apply(RequestOptions.bitmapTransform(transformation))
-                        .into(binding.workoutimg)
+                        .into(binding.layout.workoutimg)
                     Glide.with(requireContext())
                         .load(R.drawable.blankimg)
                         .apply(RequestOptions.bitmapTransform(transformation))
-                        .into(binding.breakfast)
+                        .into(binding.layout.breakfast)
                     Glide.with(requireContext())
                         .load(R.drawable.blankimg)
                         .apply(RequestOptions.bitmapTransform(transformation))
-                        .into(binding.lunch)
+                        .into(binding.layout.lunch)
                     Glide.with(requireContext())
                         .load(R.drawable.blankimg)
                         .apply(RequestOptions.bitmapTransform(transformation))
-                        .into(binding.dinner)
-                    binding.workoutType.text = resources.getString(R.string.noexercise)
-                    binding.workoutTime.text = resources.getString(R.string.noexercise)
+                        .into(binding.layout.dinner)
+                    binding.layout.workoutType.text = resources.getString(R.string.noexercise)
+                    binding.layout.workoutTime.text = resources.getString(R.string.noexercise)
                 }
             }
         }
