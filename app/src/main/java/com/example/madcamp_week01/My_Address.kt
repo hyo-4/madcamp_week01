@@ -61,12 +61,12 @@ class MyAddress : Fragment() {
                 recyclerV.visibility = View.INVISIBLE
             } else {
 
-                    noAddressDataTextView.visibility = View.INVISIBLE
-                    recyclerV.visibility = View.VISIBLE
+                noAddressDataTextView.visibility = View.INVISIBLE
+                recyclerV.visibility = View.VISIBLE
 
-                    adapter = AddressAdapter(contactsList)
-                    recyclerV.adapter = adapter
-                    recyclerV.layoutManager = LinearLayoutManager(context)
+                adapter = AddressAdapter(contactsList)
+                recyclerV.adapter = adapter
+                recyclerV.layoutManager = LinearLayoutManager(context)
 
             }
         }
