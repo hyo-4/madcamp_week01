@@ -50,6 +50,8 @@ class MyAddress : Fragment() {
             contactsList.addAll(savedContacts)
             filteredList.clear()
             filteredList.addAll(savedContacts)
+            SearchContact.setQuery("", false)
+            SearchContact.clearFocus()
 
             SearchContact.isFocusable = false
             SearchContact.isFocusableInTouchMode = false
