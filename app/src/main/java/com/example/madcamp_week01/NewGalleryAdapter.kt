@@ -16,6 +16,7 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import java.util.Locale
 
 class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<NewGalleryAdapter.ContactViewHolder>() {
 
@@ -50,7 +51,7 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
                 workoutImageView.visibility = View.VISIBLE
                 workoutView.visibility = View.VISIBLE
                 detailTextView.visibility= View.VISIBLE
-                detailTextView.text = "${workout.workoutTime} 동안 ${workout.workoutType} 했어요"
+                detailTextView.text = " ${workout.workoutType} for ${workout.workoutTime}"
                 workoutImageView.setOnClickListener {
                    showDetailFragment(workout.workoutImg!!,workout.year,workout.month,workout.date,"workout")
                 }
@@ -108,8 +109,9 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
                 dinnerImageView.visibility = View.GONE
                 dinnerView.visibility = View.GONE
             }
-
-            dateView.text = "${workout.year}/${workout.month}/${workout.date}"
+            val monthFormatted = String.format(Locale.getDefault(), "%02d", workout.month)
+            val dayFormatted = String.format(Locale.getDefault(), "%02d", workout.date)
+            dateView.text = "${workout.year}/${monthFormatted}/${dayFormatted}"
 
         }
 

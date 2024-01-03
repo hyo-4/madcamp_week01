@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="운동 등록하기"
-            android:fontFamily="@font/myfont"
+            android:fontFamily="@font/extrabold"
             android:layout_marginTop="20dp"
             android:layout_marginStart="40dp"
             android:textSize="24sp" />
@@ -41,6 +41,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/regular"
             android:hint="운동 종류를 입력하세요"
             android:inputType="text"/>
 
@@ -48,6 +49,7 @@
             android:id="@+id/WorkTimeText"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
             android:layout_gravity="center"
             android:hint="운동 시간을 입력하세요"
             android:inputType="text"/>
@@ -68,7 +70,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textAllCaps="false"
-                android:fontFamily="@font/myfont"
+                android:fontFamily="@font/regular"
                 android:text="Upload Image" />
 
             <androidx.appcompat.widget.AppCompatButton

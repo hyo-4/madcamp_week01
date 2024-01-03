@@ -21,13 +21,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.w3c.dom.Text
+import java.util.Locale
 
 
 class GalleryDetail(detailImage : Uri, year:Int, month:Int, date:Int, type: String) : Fragment() {
     private lateinit var binding: FragmentGalleryDetailBinding
     lateinit var updateImg: ActivityResultLauncher<String>
     var db: AppDatabase? = null
-    var newText = "${year} / ${month} / ${date}"
+    val monthFormatted = String.format(Locale.getDefault(), "%02d", month+1)
+    val dayFormatted = String.format(Locale.getDefault(), "%02d", date)
+    var newText = "${year}.${monthFormatted}.${dayFormatted}"
     var detailImg = detailImage
     var inputimage: Uri? = null
     val addYear = year

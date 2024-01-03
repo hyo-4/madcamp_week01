@@ -45,13 +45,18 @@ class Free : Fragment() {
         binding = WorkoutBinding.inflate(inflater, container, false)
         val bottomSheetLayout: LinearLayout = binding.layout.bottomSheetLayout
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
-        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetLayout?.visibility = View.VISIBLE
+        Log.d("When Create", "onCreateView: ${bottomSheetBehavior?.state}")
+        Log.d("When Create", "Layout visibility: ${bottomSheetLayout?.visibility}")
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         db = AppDatabase.getInstance(requireContext())
-
+        Log.d("ViewCreated", "onCreateView: ${bottomSheetBehavior?.state}")
+        view?.post {
+            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
         val todayCalendar = Calendar.getInstance()
         val todayYear = todayCalendar.get(Calendar.YEAR)
         val todayMonth = todayCalendar.get(Calendar.MONTH) + 1

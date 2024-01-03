@@ -25,11 +25,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="14dp"
         android:layout_toEndOf="@+id/imageView"
         android:text="황승찬"
         android:textSize="20sp"
-        android:fontFamily="@font/myfont"
+        android:fontFamily="@font/bold"
         />
 
     <TextView
@@ -40,6 +40,6 @@
         android:layout_alignLeft="@+id/nameItem"
         android:textSize="15sp"
         android:text="000-0000-0000"
-        android:fontFamily="@font/myfont4" />
+        android:fontFamily="@font/regular" />
 
 </RelativeLayout>
