@@ -15,8 +15,7 @@
 
 |백승효(숙명여대 20) | 황승찬(카이스트 22)|
 |:-:|:-:|
-|<img src="이미지 링크" width=150>|<img src="이미지 링크" width=150>|
-|맡은 기능|맡은 기능|
+|<img src="https://github.com/hyo-4/madcamp_week01/assets/70904075/3de28ee5-a91e-47a2-84dc-33d708f2de3a" width=150>|<img src="이미지 링크" width=150>|
 |[@hyo-4](https://github.com/hyo-4)|[@chanee718](https://github.com/chanee718)|
 
 <br />
@@ -30,6 +29,10 @@
 
 ## 🗓 프로젝트 기간
 > 2023.12.28 ~ 2022.1.03
+
+백승효 : 갤러리, 갤러리 세부페이지, 갤러리 사진 수정, 연락처 검색, 캘린더 식단 & 운동 등록 및 수정, SplashScreen
+<br />
+황승찬 :
 
 ## 🚀 데모
 
