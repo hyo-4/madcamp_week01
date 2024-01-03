@@ -101,17 +101,9 @@ class MyAddress : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 Log.d("change",newText.toString())
                 newText?.let {
-                    var newoutputList = mutableListOf<Contacts>()
-
-                    for (contact in filteredList) {
-                        if (contact.name.contains(newText, true) && !newoutputList.contains(contact)) {
-                            newoutputList.add(contact)
-                        }
-                    }
-
-                    Log.d("submit", newText)
-                    Log.d("filter", filteredList.toString())
-                    Log.d("new", newoutputList.toString())
+                    val newoutputList = filteredList.filter { contact ->
+                        contact.name.contains(newText, true)
+                    }.toMutableList()
 
                     noAddressDataTextView.visibility = View.INVISIBLE
                     recyclerV.visibility = View.VISIBLE

@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 
 class NewGallery : Fragment() {
     private var newGalleryAdapter: NewGalleryAdapter? = null
+    lateinit var TitleView : TextView
     lateinit var GalleryRecyclerView: RecyclerView
     lateinit var GalleryText: TextView
     lateinit var DietBtn : ImageButton
@@ -44,10 +45,13 @@ class NewGallery : Fragment() {
 
     override fun onViewCreated(view:View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        TitleView = view.findViewById(R.id.textView2)
         GalleryRecyclerView = view.findViewById(R.id.recyclerNewGalleryView)
         GalleryText = view.findViewById(R.id.noGalleryData)
         DietBtn = view.findViewById(R.id.btnFilterDiet)
         ExerciseBtn = view.findViewById(R.id.btnFilterExercise)
+
+        TitleView.setText("Gallery")
 
 
         db = AppDatabase.getInstance(requireContext())
@@ -74,8 +78,9 @@ class NewGallery : Fragment() {
             DietBtn.setOnClickListener{
                 //workoutList 자체에 접근하면 그 데이터가 수정되기 때문에 filteredList를 새로 생성해서 workoutList에 복사본을 만들고, 그 복사본에 필요한 img 빼고는 null로 바꾼다.
                 val filteredList = mutableListOf<Workout>()
-
+                TitleView.setText("Diet Gallery")
                 for (workout in WorkoutList) {
+
                     if (workout.breakfastImg != null || workout.lunchImg != null || workout.dinnerImg != null) {
                         val filteredWorkout = Workout(
                             year = workout.year,
@@ -98,6 +103,7 @@ class NewGallery : Fragment() {
 
             ExerciseBtn.setOnClickListener{
                 val filteredList2 = mutableListOf<Workout>()
+                TitleView.setText("Workout Gallery")
                 for (workout in WorkoutList) {
                     if(workout.workoutImg != null) {
                         val filteredWorkout = Workout(

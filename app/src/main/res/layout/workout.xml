@@ -26,28 +26,59 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:padding="10dp"
-        android:elevation="10dp"
         app:behavior_hideable="false"
         app:behavior_peekHeight="254dp"
         app:cardCornerRadius="36dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-        <TextView
-            android:id="@+id/todaydate"
+        <View
+            android:id="@+id/bar"
+            android:layout_width="80dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dragbar"
+            android:layout_gravity="center_horizontal"
+            android:elevation="3dp"/>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30sp"
-            android:textSize="24sp"
-            android:fontFamily="@font/myfont"
-            android:text="@string/todayDiet" />
+            android:gravity="center"
+            android:layout_marginTop="40sp">
+
+            <ImageView
+                android:id="@+id/calendarlogo"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/calendar"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/todaydate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="@font/myfont"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:text="0000/00/00" />
+
+            <View
+                android:id="@+id/empty"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"/>
+        </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/diet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25sp"
-            android:layout_marginTop="84sp"
+            android:layout_marginTop="94sp"
             android:textSize="23sp"
             android:fontFamily="@font/myfont"
             android:text="@string/todayDiet" />
@@ -55,7 +86,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="124sp"
+            android:layout_marginTop="134sp"
             android:layout_marginStart="20sp"
             android:layout_gravity="left"
             android:orientation="vertical"
@@ -83,7 +114,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="124sp"
+            android:layout_marginTop="134sp"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal">
@@ -109,7 +140,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="124sp"
+            android:layout_marginTop="134sp"
             android:layout_marginEnd="20sp"
             android:orientation="vertical"
             android:layout_gravity="right"
@@ -140,7 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25sp"
-            android:layout_marginTop="274sp"
+            android:layout_marginTop="284sp"
             android:textSize="23sp"
             android:text="@string/todayWorkout" />
 
@@ -149,7 +180,7 @@
             android:layout_width="150dp"
             android:layout_height="200dp"
             android:layout_marginStart="15sp"
-            android:layout_marginTop="324sp"
+            android:layout_marginTop="334sp"
             android:layout_marginBottom="100sp"
             android:background="@drawable/workoutimage"
             android:clipToOutline="true"
@@ -160,7 +191,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="190sp"
-            android:layout_marginTop="374sp"
+            android:layout_marginTop="384sp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -185,7 +216,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="190sp"
-            android:layout_marginTop="434sp"
+            android:layout_marginTop="444sp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 

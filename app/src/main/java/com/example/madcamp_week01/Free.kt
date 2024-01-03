@@ -26,7 +26,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class Free : Fragment() {
     private lateinit var binding: WorkoutBinding
@@ -57,6 +59,10 @@ class Free : Fragment() {
         val todayDay = todayCalendar.get(Calendar.DAY_OF_MONTH)
         showView(todayYear, todayMonth, todayDay)
 
+        val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+        val today = dateFormat.format(todayCalendar.time)
+        binding.todaydate.text = today
+
         binding.breakfast.setOnClickListener {
             binding.bottomsheet.visibility = View.INVISIBLE
             navigateToNewBreakFast(todayYear, todayMonth, todayDay)
@@ -76,8 +82,6 @@ class Free : Fragment() {
 
 
         binding.calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val selectedDate = "$year-$month-$dayOfMonth"
-            Log.d("date", "$selectedDate")
             showView(year, month+1, dayOfMonth)
             binding.breakfast.setOnClickListener {
                 binding.bottomsheet.visibility = View.INVISIBLE
@@ -95,6 +99,10 @@ class Free : Fragment() {
                 binding.bottomsheet.visibility = View.INVISIBLE
                 navigateToNewWorkout(year, month+1, dayOfMonth) // Workout data 전체 보내기
             }
+
+            val monthFormatted = String.format(Locale.getDefault(), "%02d", month+1)
+            val dayFormatted = String.format(Locale.getDefault(), "%02d", dayOfMonth)
+            binding.todaydate.text = "$year/$monthFormatted/$dayFormatted"
         }
     }
 

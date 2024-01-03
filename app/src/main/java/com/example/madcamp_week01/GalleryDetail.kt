@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -59,6 +60,10 @@ class GalleryDetail(detailImage : Uri, year:Int, month:Int, date:Int, type: Stri
                 updateImage(inputimage, newtype)
                 navigateBack()
             }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            navigateBack()
         }
 
         updateImg =
@@ -139,7 +144,7 @@ class GalleryDetail(detailImage : Uri, year:Int, month:Int, date:Int, type: Stri
         val myFragment = NewGallery()
 
         val fragmentTransaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.galleryDetailContainer, myFragment)
+        fragmentTransaction.replace(R.id.galleryDetailContainer, myFragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
