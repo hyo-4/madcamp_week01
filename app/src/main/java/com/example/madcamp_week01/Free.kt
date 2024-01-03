@@ -11,10 +11,17 @@ import android.widget.TextView
 import android.util.Log
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.example.madcamp_week01.databinding.AddcontactBinding
 import com.example.madcamp_week01.databinding.WorkoutBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,6 +39,11 @@ class Free : Fragment() {
         // Inflate the layout for this fragment
         binding = WorkoutBinding.inflate(inflater, container, false)
         binding.bottomsheet.visibility = View.VISIBLE
+
+        val params = binding.bottomsheet.layoutParams as CoordinatorLayout.LayoutParams
+        val behavior = params.behavior as BottomSheetBehavior
+        behavior.peekHeight = resources.getDimensionPixelSize(R.dimen.bottom_sheet_peek_height)
+        behavior.maxHeight = resources.getDimensionPixelSize(R.dimen.bottom_sheet_max_height)
 
         return binding.root
     }
@@ -87,11 +99,14 @@ class Free : Fragment() {
     }
 
     private fun showView(year:Int, month:Int, day:Int){
-        val noImg = AppCompatResources.getDrawable(requireContext(), R.drawable.blankimg)
         CoroutineScope(Dispatchers.IO).launch{
             val dateWorkout = db?.workoutDao()?.getWorkoutByDate(year, month, day)
             var selectedWorkout: Workout? = dateWorkout?.firstOrNull()  //선택한 날짜의 workout 데이터
             Log.d("check", "$selectedWorkout")
+            val transformation = MultiTransformation(
+                CenterCrop(),
+                RoundedCorners(50)
+            )
 
             withContext(Dispatchers.Main) {
                 if (selectedWorkout != null) {
@@ -100,12 +115,15 @@ class Free : Fragment() {
                     if (selectedWorkout.workoutImg != null) {
                         Glide.with(requireContext())
                             .load(selectedWorkout.workoutImg)
-                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(RequestOptions.bitmapTransform(transformation))
                             .into(binding.workoutimg)
                         binding.workoutType.text = selectedWorkout.workoutType
                         binding.workoutTime.text = selectedWorkout.workoutTime
                     } else {
-                        binding.workoutimg.setImageDrawable(noImg)
+                        Glide.with(requireContext())
+                            .load(R.drawable.blankimg)
+                            .apply(RequestOptions.bitmapTransform(transformation))
+                            .into(binding.workoutimg)
                         binding.workoutType.text = resources.getString(R.string.noexercise)
                         binding.workoutTime.text = resources.getString(R.string.noexercise)
                     }
@@ -113,36 +131,57 @@ class Free : Fragment() {
                     if (selectedWorkout.breakfastImg != null) {
                         Glide.with(requireContext())
                             .load(selectedWorkout.breakfastImg)
-                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(RequestOptions.bitmapTransform(transformation))
                             .into(binding.breakfast)
                     } else {
-                        binding.breakfast.setImageDrawable(noImg)
+                        Glide.with(requireContext())
+                            .load(R.drawable.blankimg)
+                            .apply(RequestOptions.bitmapTransform(transformation))
+                            .into(binding.breakfast)
                     }
                     // **changing 점심 식단 이미지
                     if (selectedWorkout.lunchImg != null) {
                         Glide.with(requireContext())
                             .load(selectedWorkout.lunchImg)
-                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(RequestOptions.bitmapTransform(transformation))
                             .into(binding.lunch)
                     } else {
-                        binding.lunch.setImageDrawable(noImg)
+                        Glide.with(requireContext())
+                            .load(R.drawable.blankimg)
+                            .apply(RequestOptions.bitmapTransform(transformation))
+                            .into(binding.lunch)
                     }
                     // **changing 저녁 식단 이미지
                     if (selectedWorkout.dinnerImg != null) {
                         Glide.with(requireContext())
                             .load(selectedWorkout.dinnerImg)
-                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(RequestOptions.bitmapTransform(transformation))
                             .into(binding.dinner)
                     } else {
-                        binding.dinner.setImageDrawable(noImg)
+                        Glide.with(requireContext())
+                            .load(R.drawable.blankimg)
+                            .apply(RequestOptions.bitmapTransform(transformation))
+                            .into(binding.dinner)
                     }
                     // changing View finished
                 } else {    // 선택된 날짜에 해당하는 데이터가 없는 경우
                     // db에 해당 날짜의 데이터를 추가
-                    binding.workoutimg.setImageDrawable(noImg)
-                    binding.breakfast.setImageDrawable(noImg)
-                    binding.lunch.setImageDrawable(noImg)
-                    binding.dinner.setImageDrawable(noImg)
+                    Glide.with(requireContext())
+                        .load(R.drawable.blankimg)
+                        .apply(RequestOptions.bitmapTransform(transformation))
+                        .into(binding.workoutimg)
+                    Glide.with(requireContext())
+                        .load(R.drawable.blankimg)
+                        .apply(RequestOptions.bitmapTransform(transformation))
+                        .into(binding.breakfast)
+                    Glide.with(requireContext())
+                        .load(R.drawable.blankimg)
+                        .apply(RequestOptions.bitmapTransform(transformation))
+                        .into(binding.lunch)
+                    Glide.with(requireContext())
+                        .load(R.drawable.blankimg)
+                        .apply(RequestOptions.bitmapTransform(transformation))
+                        .into(binding.dinner)
                     binding.workoutType.text = resources.getString(R.string.noexercise)
                     binding.workoutTime.text = resources.getString(R.string.noexercise)
                 }

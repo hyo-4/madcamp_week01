@@ -15,7 +15,7 @@
     <string name="todayWorkout"><b>오늘의 운동</b></string>
     <string name="exerciseType"><b>운동 종류</b></string>
     <string name="exerciseTime"><b>운동 시간</b></string>
-    <string name="noexercise">(운동 기록 없음)</string>
+    <string name="noexercise">(기록 없음)</string>
     <string name="profilename">(Name)</string>
     <string name="tagprofile">(Add a tag for your friend)</string>
     <string name="delete">Delete this address</string>

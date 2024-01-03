@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentTransaction
@@ -57,6 +58,9 @@ class NewLunch(year:Int, month:Int, Day:Int) : Fragment() {
                 createFoodAndNavigateBack(inputimage)
                 navigateToCalendar()
             }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            navigateToCalendar()
         }
 
 

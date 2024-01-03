@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:id="@+id/addWorkoutPage"
     android:layout_height="match_parent"
@@ -14,57 +15,70 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🗓운동 등록하기🗓"
-            android:layout_marginLeft="16dp"
-            android:textSize="20sp" />
+            android:text="운동 등록하기"
+            android:fontFamily="@font/myfont"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:textSize="24sp" />
 
 
         <ImageView
             android:id="@+id/workoutImage"
-            android:layout_width="252dp"
-            android:layout_height="225dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="30dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
+            android:clipToOutline="true"
+            android:background="@drawable/workoutimage"
+            app:background="@drawable/workoutimage"
             android:src="@drawable/blankimg" />
-
-        <Button
-            android:id="@+id/selectworkout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="40dp"
-            android:text="Select Image" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="운동하셨나요? 👟"
-            />
 
         <EditText
             android:id="@+id/workTypeText"
-            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:hint="운동 종류를 입력하세요"
             android:inputType="text"/>
 
         <EditText
             android:id="@+id/WorkTimeText"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:hint="운동 시간을 입력하세요"
             android:inputType="text"/>
 
-        <Button
-            android:id="@+id/workoutSave"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="250dp"
             android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:text="Save" />
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/selectworkout"
+                android:layout_width="190dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/uploadbutton"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:fontFamily="@font/myfont"
+                android:text="Upload Image" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/workoutSave"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/uploadbutton"
+                android:drawableLeft="@drawable/savebutton"
+                android:gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

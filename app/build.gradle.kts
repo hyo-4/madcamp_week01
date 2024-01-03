@@ -65,6 +65,7 @@ dependencies {
     androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    implementation("jp.wasabeef:glide-transformations:4.3.0")
 
 
     testImplementation("junit:junit:4.13.2")

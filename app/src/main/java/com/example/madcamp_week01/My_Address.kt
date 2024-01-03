@@ -48,6 +48,8 @@ class MyAddress : Fragment() {
             var contactsList = mutableListOf<Contacts>()
             contactsList.addAll(savedContacts)
             filteredList.addAll(savedContacts)
+            SearchContact.isFocusable = false
+            SearchContact.isFocusableInTouchMode = false
 
             if (contactsList.isEmpty()) {
                 noAddressDataTextView.visibility = View.VISIBLE
