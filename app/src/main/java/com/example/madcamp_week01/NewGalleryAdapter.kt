@@ -12,6 +12,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 
 class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<NewGalleryAdapter.ContactViewHolder>() {
 
@@ -33,9 +37,16 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
         fun bind(workout: Workout, position: Int) {
             index = position
             Log.d("workout",workout.toString())
+            val transformation = MultiTransformation(
+                CenterCrop(),
+                RoundedCorners(50)
+            )
 
             workout.workoutImg?.let {
-                Glide.with(itemView.context).load(it).into(workoutImageView)
+                Glide.with(itemView.context)
+                    .load(it)
+                    .apply(RequestOptions.bitmapTransform(transformation))
+                    .into(workoutImageView)
                 workoutImageView.visibility = View.VISIBLE
                 workoutView.visibility = View.VISIBLE
                 detailTextView.visibility= View.VISIBLE
@@ -52,7 +63,10 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
 
             // Load and display breakfast image if it exists
             workout.breakfastImg?.let {
-                Glide.with(itemView.context).load(it).into(breakfastImageView)
+                Glide.with(itemView.context)
+                    .load(it)
+                    .apply(RequestOptions.bitmapTransform(transformation))
+                    .into(breakfastImageView)
                 breakfastImageView.visibility = View.VISIBLE
                 breakfastView.visibility = View.VISIBLE
                 breakfastImageView.setOnClickListener {
@@ -65,7 +79,10 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
 
             // Load and display lunch image if it exists
             workout.lunchImg?.let {
-                Glide.with(itemView.context).load(it).into(lunchImageView)
+                Glide.with(itemView.context)
+                    .load(it)
+                    .apply(RequestOptions.bitmapTransform(transformation))
+                    .into(lunchImageView)
                 lunchImageView.visibility = View.VISIBLE
                 lunchView.visibility= View.VISIBLE
                 lunchImageView.setOnClickListener {
@@ -78,7 +95,10 @@ class NewGalleryAdapter(var WorkoutList: List<Workout>?) : RecyclerView.Adapter<
 
             // Load and display dinner image if it exists
             workout.dinnerImg?.let {
-                Glide.with(itemView.context).load(it).into(dinnerImageView)
+                Glide.with(itemView.context)
+                    .load(it)
+                    .apply(RequestOptions.bitmapTransform(transformation))
+                    .into(dinnerImageView)
                 dinnerImageView.visibility = View.VISIBLE
                 dinnerView.visibility = View.VISIBLE
                 dinnerImageView.setOnClickListener {
