@@ -37,13 +37,13 @@
 
 |앱 실행 화면|연락처 메인페이지|연락처 등록 페이지|
 |------|---|---|
-|<img src="(이미지링크)" width="300px" height="300px">|<img src="(이미지링크)" width="300px" height="300px">|<img src="(이미지링크)" width="300px" height="300px">|
+|<img src="(이미지링크)" width="300px">|<img src="(이미지링크)" width="300px">|<img src="(이미지링크)" width="300px">|
 |연락처 검색 | 갤러리 메인페이지|갤러리 상세페이지|
-|<img src="(이미지링크)" width="300px" height="300px">|<img src="(이미지링크)" width="300px" height="300px">|<img src="(이미지링크)" width="300px" height="300px">|
+|<img src="(이미지링크)" width="300px">|<img src="(이미지링크)" width="300px">|<img src="(이미지링크)" width="300px">|
 |갤러리 사진 수정페이지| 캘린더 메인페이지 | 캘린더 bottomup |
-|<img src="(이미지링크)" width="300px" height="300px">|<img src="(이미지링크)" width="300px" height="300px">|<img src="(이미지링크)" width="300px" height="300px">|
+|<img src="(이미지링크)" width="300px">|<img src="(이미지링크)" width="300px">|<img src="(이미지링크)" width="300px">|
 | 캘린더 식단 등록페이지 | 캘린더 운동 등록페이지
-|<img src="(이미지링크)" width="300px" height="300px">|<img src="(이미지링크)" width="300px" height="300px">
+|<img src="(이미지링크)" width="300px">|<img src="(이미지링크)" width="300px">
 
 </br>
 </br>
